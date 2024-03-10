@@ -16,14 +16,14 @@ function FormInputsItem(props){
     let error = <span>{props.error}</span>
 
     let handleInputChange = function(value){
-        props.onChange(value, id);
+        props.onChange(value);
     }
 
     return (
     <div className={width + " flex flex-col justify-center content-center px-4"}>
         {props.label && label}
         <InputAdaptable onChange={handleInputChange} 
-        value={props.value} className={inputClass} id={id}/>
+        value={props.value} className={inputClass} id={id} {...props}/>
         {props.error && error}
     </div>
     );

@@ -23,6 +23,13 @@ let formJSON = {
             width : 6,
             weight : 100,
         },
+        4 : {
+            type : "select",
+            label : "Select city",
+            width : 12,
+            weight : 97,
+            options : ["Belgrade", "Novi sad", "Nis"]
+        },
     }
 }
 
@@ -38,8 +45,20 @@ function FormInputs(){
         setFormValue(newFormValue);
     }
 
-    let inputs = sortedInputKeys.map((key) => 
-        <FormInputsItem key={key} id={key} value={formValue[key] ?? ""} onChange={handleInputChange} {...formJSON.formElements[key]}/>
+    let inputs = sortedInputKeys.map((key) => {
+        let currentInput = formJSON.formElements[key];
+        let defaultValue = "";
+
+        if(currentInput.type === "select"){
+            defaultValue = 0;
+        }
+
+        let handler = function(value){
+            handleInputChange(value, key);
+        }
+        
+        return <FormInputsItem key={key} id={key} value={formValue[key] ?? defaultValue} onChange={handler} {...formJSON.formElements[key]}/>
+    }
     )
 
     return (
