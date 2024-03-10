@@ -1,19 +1,6 @@
-import React from "react"
-
+import React from "react";
 function InputAdaptable(props){
     let id = props.id ?? Math.floor(Math.random() * 5000);
-
-    let width = "";
-    if(props.width !== 12){
-        width = `w-${props.width}/12`;
-    }else{
-        width = `w-full`;
-    }
-    
-    let inputClass = "border-black border-2";
-
-    let label = <label htmlFor={id}>{props.label}</label>
-    let error = <span>{props.error}</span>
 
     let inputField = <input type="text" name={id} id={id} />;
 
@@ -25,21 +12,17 @@ function InputAdaptable(props){
         inputField = <input type="number" name={id} id={id} />
     }
 
-    function handleInputChange(key, e){
-        let value = e.target.value;
+    function bubbleValue(event){
+        let value = event.target.value;
+        props.onChange(value);
+    }
 
-        props.onChange(value, key);
-    } 
-
-    //Bind input field
-    inputField = React.cloneElement(inputField, { onChange: (e) => handleInputChange(id, e), value : props.value, className : inputClass });
+    inputField = React.cloneElement(inputField, { onChange: bubbleValue, value : props.value, className : props.className });
 
     return (
-    <div className={width + " flex flex-col justify-center content-center px-4"}>
-        {props.label && label}
+    <>
         {inputField}
-        {props.error && error}
-    </div>
+    </>
     );
 }
 

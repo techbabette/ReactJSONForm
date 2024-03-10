@@ -1,7 +1,7 @@
-import InputAdaptable from "./InputAdaptable"
+import FormInputsItem from "./FormInputsItem"
 import { useState } from "react";
 let formJSON = {
-    "formId" : 1,
+    formId : 1,
     formName : "New form",
     formDirection : "row",
     formElements : {
@@ -26,7 +26,7 @@ let formJSON = {
     }
 }
 
-function InputForm(){
+function FormInputs(){
     let [formValue, setFormValue] = useState({});
 
     let inputKeys = Object.keys(formJSON.formElements);
@@ -39,7 +39,7 @@ function InputForm(){
     }
 
     let inputs = sortedInputKeys.map((key) => 
-        <InputAdaptable key={key} id={key} value={formValue[key] ?? ""} onChange={handleInputChange} {...formJSON.formElements[key]}/>
+        <FormInputsItem key={key} id={key} value={formValue[key] ?? ""} onChange={handleInputChange} {...formJSON.formElements[key]}/>
     )
 
     return (
@@ -50,4 +50,4 @@ function InputForm(){
 
 }
 
-export default InputForm
+export default FormInputs

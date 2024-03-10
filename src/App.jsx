@@ -1,10 +1,10 @@
 import './App.css'
-import InputForm from './InputForm'
+import FormInputs from './FormInputs'
 function App() {
   return (
     <>
     <div className='w-6/12 mx-auto'>
-      <InputForm/>
+      <FormInputs/>
     </div>
     </>
   )
