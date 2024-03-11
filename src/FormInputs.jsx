@@ -30,6 +30,14 @@ let formJSON = {
             weight : 97,
             options : ["Belgrade", "Novi sad", "Nis"]
         },
+        5 : {
+            type : "select_multiple",
+            label : "Select classes",
+            hint : "Select multiple",
+            width : 12,
+            weight : 96,
+            options : ["C#", "PHP", "React"]
+        }
     }
 }
 
@@ -51,6 +59,10 @@ function FormInputs(){
 
         if(currentInput.type === "select"){
             defaultValue = 0;
+        }
+
+        if(currentInput.type === "select_multiple"){
+            defaultValue = [];
         }
 
         let handler = function(value){

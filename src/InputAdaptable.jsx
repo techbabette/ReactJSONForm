@@ -1,18 +1,28 @@
 import React from "react";
+import InputSelectMultiple from "./InputSelectMultiple";
 function InputAdaptable(props){
     let id = props.id ?? Math.floor(Math.random() * 5000);
 
     let inputField = <input type="text" name={id} id={id} />;
 
+    let className = props.className;
     if(props.type === "text"){
+        className += " input input-bordered"
         inputField = <input type="text" name={id} id={id} />
     }
 
+    if(props.type === "email"){
+        className += " input input-bordered"
+        inputField = <input type="email" name={id} id={id} />
+    }
+
     if(props.type === "number"){
+        className += " input input-bordered"
         inputField = <input type="number" name={id} id={id} />
     }
 
     if(props.type === "select"){
+        className += " select select-bordered"
         let option_value_field = props.option_value_field ?? "__";
         let option_text_field = props.option_text_field ?? "__";
 
@@ -28,12 +38,21 @@ function InputAdaptable(props){
         </select>
     }
 
+    if(props.type === "select_multiple"){
+        inputField = <InputSelectMultiple name={id} id={id}/>
+    }
+
     function bubbleValue(event){
-        let value = event.target.value;
+        let value;
+        if(props.type !== "select_multiple"){
+            value = event.target.value;
+        }
+
+        value = event;
         props.onChange(value);
     }
 
-    inputField = React.cloneElement(inputField, { onChange: bubbleValue, value : props.value, className : props.className });
+    inputField = React.cloneElement(inputField, { ...props, onChange: bubbleValue, value : props.value, className : className });
 
     return (
     <>
