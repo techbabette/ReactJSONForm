@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import LayoutStandard from "../LayoutStandard";
 import PageWelcome from "../PageWelcome";
 import PageForm from "../PageForm";
+import PageLogin from "../PageLogin";
 
 const router = createBrowserRouter([
     {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
                 index: true
             },
             {
-                element: <PageWelcome/>,
+                element: <PageLogin/>,
                 path: "/login"
             },
             {

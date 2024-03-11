@@ -36,7 +36,7 @@ function LayoutStandard(){
     <>
     <nav className="navbar bg-base-100 border-b-2">
         <div className="flex-1">
-            <NavLink to="/" text="Formify"/>
+            <NavLink to="/" text="Formify" className="text-primary text-2xl"/>
         </div>
         <div className="flex-none">
             <ul className="menu menu-horizontal px-1">

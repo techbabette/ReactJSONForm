@@ -16,6 +16,8 @@ function FormComplete(props){
             }
         }
 
+        errors = {...errors, ...props.errors}
+
         setFormErrors(errors);
 
         if(Object.keys(errors).length > 0){

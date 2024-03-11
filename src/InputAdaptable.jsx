@@ -11,6 +11,11 @@ function InputAdaptable(props){
         inputField = <input type="text" name={id} id={id} />
     }
 
+    if(props.type === "password"){
+        className += " input input-bordered"
+        inputField = <input type="password" name={id} id={id} />
+    }
+
     if(props.type === "email"){
         className += " input input-bordered"
         inputField = <input type="email" name={id} id={id} />
