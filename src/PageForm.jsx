@@ -1,4 +1,5 @@
 import FormComplete from './FormComplete'
+import NavLink from './NavLink';
 
 let formJSON = {
   formId : 1,
@@ -54,6 +55,17 @@ function PageForm() {
 
   return (
     <>
+    <nav className="navbar bg-base-100 border-b-2">
+        <div className="flex-1">
+            <NavLink to="/" text="Formify" className="text-primary"/>
+        </div>
+        <div className="flex-none">
+            <ul className="menu menu-horizontal px-1">
+              <NavLink to="form/new" text="Make your own form here" className="text-accent"/>
+            </ul>
+        </div>
+    </nav>
+
     <div className='w-6/12 mx-auto'>
       <FormComplete form={formJSON} onSubmit={helloWorld}/>
     </div>

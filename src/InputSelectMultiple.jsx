@@ -31,7 +31,7 @@ function InputSelectMultiple(props){
         )
     })
 
-    let hint = props.hint;
+    let hint = props.hint ?? "Select multiple";
 
     if(props.value.length > 0){
         let hints = [];
