@@ -31,10 +31,26 @@ function InputSelectMultiple(props){
         )
     })
 
+    let hint = props.hint;
+
+    if(props.value.length > 0){
+        let hints = [];
+        props.value.forEach((value)  => {
+            if(option_text_field === "__" && option_value_field === "__"){
+                hints.push(value);
+            }else{
+                let option = props.options.filter((el) => el[option_value_field] === value);
+                let optionText = option[option_text_field];
+                hints.push(optionText);
+            }
+        })
+        hint = hints.join(", ");
+    }
+
     return (
     <div className={"dropdown " + props.className}>
         <label tabIndex={id} htmlFor={id} role="button" className="w-full">{props.label}</label>
-        <div tabIndex={id} role="button" className="btn m-1 w-full">{props.hint}</div>
+        <div tabIndex={id} role="button" className="input input-bordered m-1 w-full flex items-center">{hint}</div>
         <ul tabIndex={id} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 w-full rounded-box">
             {options}
         </ul>

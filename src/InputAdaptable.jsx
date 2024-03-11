@@ -26,6 +26,8 @@ function InputAdaptable(props){
         let option_value_field = props.option_value_field ?? "__";
         let option_text_field = props.option_text_field ?? "__";
 
+        let hintOption = <option value={0} disabled={true}>{props.hint ?? "Select one"}</option>
+
         let options = props.options.map((option, index) => {
             let option_value = option_value_field === "__" ? option : option[option_value_field];
             let option_text = option_text_field === "__" ? option : option[option_text_field];
@@ -34,6 +36,7 @@ function InputAdaptable(props){
 
         inputField = 
         <select name={id} id={id}>
+            {hintOption}
             {options}
         </select>
     }
@@ -46,6 +49,8 @@ function InputAdaptable(props){
         let value;
         if(props.type !== "select_multiple"){
             value = event.target.value;
+            props.onChange(value);
+            return;
         }
 
         value = event;

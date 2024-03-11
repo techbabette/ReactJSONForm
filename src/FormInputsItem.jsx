@@ -14,14 +14,14 @@ function FormInputsItem(props){
 
     let label = false;
     if(props.label){
-        label = <label htmlFor={id}>{props.label}</label>
+        label = <label htmlFor={id} className="py-1">{props.label}</label>
     }
 
     if(props.type === "select_multiple"){
         label = false;
     }
 
-    let error = <span>{props.error}</span>
+    let error = <span className="alert alert-warning my-2">{props.error}</span>
 
     let handleInputChange = function(value){
         props.onChange(value);

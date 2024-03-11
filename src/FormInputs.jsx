@@ -1,56 +1,16 @@
 import FormInputsItem from "./FormInputsItem"
-import { useState } from "react";
-let formJSON = {
-    formId : 1,
-    formName : "New form",
-    formDirection : "row",
-    formElements : {
-        2 : {
-            type : "text",
-            label : "Last name",
-            width : 6,
-            weight : 99
-        },
-        3 : {
-            type : "email",
-            label : "Email",
-            width : 12,
-            weight : 98
-        },
-        1 : {
-            type : "text",
-            label : "First name",
-            width : 6,
-            weight : 100,
-        },
-        4 : {
-            type : "select",
-            label : "Select city",
-            width : 12,
-            weight : 97,
-            options : ["Belgrade", "Novi sad", "Nis"]
-        },
-        5 : {
-            type : "select_multiple",
-            label : "Select classes",
-            hint : "Select multiple",
-            width : 12,
-            weight : 96,
-            options : ["C#", "PHP", "React"]
-        }
-    }
-}
 
-function FormInputs(){
-    let [formValue, setFormValue] = useState({});
+function FormInputs(props){
+    let formJSON = props.form;
+    let errors = props.errors;
 
     let inputKeys = Object.keys(formJSON.formElements);
     let sortedInputKeys = inputKeys.sort((a,b) => b.weight - a.weight);
 
     function handleInputChange(newValue, key){
-        let newFormValue = {...formValue};
+        let newFormValue = {...props.value};
         newFormValue[key] = newValue;
-        setFormValue(newFormValue);
+        props.onChange(newFormValue);
     }
 
     let inputs = sortedInputKeys.map((key) => {
@@ -69,7 +29,7 @@ function FormInputs(){
             handleInputChange(value, key);
         }
         
-        return <FormInputsItem key={key} id={key} value={formValue[key] ?? defaultValue} onChange={handler} {...formJSON.formElements[key]}/>
+        return <FormInputsItem key={key} id={key} error={errors[key]} value={props.value[key] ?? defaultValue} onChange={handler} {...formJSON.formElements[key]}/>
     }
     )
 
