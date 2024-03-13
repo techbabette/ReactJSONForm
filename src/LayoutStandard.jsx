@@ -36,7 +36,7 @@ function LayoutStandard(){
     
     return (
     <>
-    <NavBar>{links}</NavBar>
+    <NavBar links={links}/>
     <Outlet/>
     </>
     );
