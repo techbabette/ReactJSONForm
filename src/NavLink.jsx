@@ -6,7 +6,7 @@ function NavLink(props){
     }
     
     function linkClass(){
-        let returnClass = props.className;
+        let returnClass = props.className ?? "";
         let active = linkActive();
         
         if(active){
