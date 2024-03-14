@@ -1,5 +1,5 @@
 import FormComplete from "./FormComplete";
-
+import { toast } from 'react-toastify';
 let loginForm = {
     formName : "Login to your Formify account",
     formElements : {
@@ -23,6 +23,7 @@ let loginForm = {
 function PageLogin(){
     function attemptLogin(formData){
         console.log(formData);
+        toast.success("Successfully logged in")
     }
 
     return (
