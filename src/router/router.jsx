@@ -4,6 +4,7 @@ import LayoutStandard from "../LayoutStandard";
 import PageWelcome from "../PageWelcome";
 import PageForm from "../PageForm";
 import PageLogin from "../PageLogin";
+import PageRegister from "../PageRegister";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
                 path: "/login"
             },
             {
-                element: <PageWelcome/>,
+                element: <PageRegister/>,
                 path: "/register"
             }
         ]
