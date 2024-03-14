@@ -5,7 +5,7 @@ function FormInputsItem(props){
 
     let width = "";
     if(props.width !== 12){
-        width = `w-${props.width}/12`;
+        width = `w-${props.width}\/12`;
     }else{
         width = `w-full`;
     }
