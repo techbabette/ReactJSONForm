@@ -32,11 +32,11 @@ function FormComplete(props){
     }
 
     return (
-    <>
+    <div className="w-full">
         <h1 className="p-2 text-2xl">{form.formName}</h1>
         <FormInputs form={form} errors={formErrors} value={formValue} onChange={handleChange}/>
         <button type="button" className="btn btn-success w-full px-2 my-5" onClick={handleSubmit}>Submit form</button>
-    </>
+    </div>
     );
 }
 

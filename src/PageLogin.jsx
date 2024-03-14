@@ -26,7 +26,7 @@ function PageLogin(){
     }
 
     return (
-        <div className="w-9/12 mx-auto">
+        <div className="w-9/12 sm:w-6/12 mx-auto solo-page flex justify-center items-center">
             <FormComplete form={loginForm} onSubmit={attemptLogin}/>
         </div>
     );
