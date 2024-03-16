@@ -52,11 +52,11 @@ function PageRegister(){
 
         if(result.success){
             setErrors(null);
-            toast.update(registrationToastr.current, {render : "Successfully created new account", type : 'success', isLoading : false, autoClose : true});
+            toast.update(registrationToastr.current, {render : "Successfully created new account", type : 'success', isLoading : false, autoClose : true, className : 'alert alert-success'});
         }else{
             let requestErrors = {...result.errors};
             setErrors(requestErrors);
-            toast.update(registrationToastr.current, {render : result.error, type: "error", isLoading : false, autoClose : true});
+            toast.update(registrationToastr.current, {render : result.error, type: "error", isLoading : false, autoClose : true, className : 'alert alert-error'});
         }
 
         registrationToastr.current = null;
