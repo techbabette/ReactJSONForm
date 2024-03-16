@@ -9,8 +9,8 @@ axiosInstance.interceptors.response.use(
         }
     }, 
     function(error){
-        let response = {success : false};
-        if(typeof error.response === undefined){
+        let response = {success : false, error : "Error communicating with server"};
+        if(!error.response){
             return response;
         }
         if(!error.response.data.errors){

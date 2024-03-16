@@ -21,7 +21,7 @@ function FormInputsItem(props){
         label = false;
     }
 
-    let error = <span className="alert alert-warning my-2">{props.error}</span>
+    let error = <span className="alert alert-error my-2">{props.error}</span>
 
     let handleInputChange = function(value){
         props.onChange(value);

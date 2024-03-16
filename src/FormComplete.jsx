@@ -1,11 +1,16 @@
 import FormInputs from "./FormInputs";
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 function FormComplete(props){
     let [formValue, setFormValue] = useState({});
     let [formErrors, setFormErrors] = useState({});
     let form = props.form;
 
-    let allErrors = {...formErrors, ...props.errors};
+    useEffect(() => {
+        let newFormErrors = {};
+        Object.assign(newFormErrors, formErrors);
+        Object.assign(newFormErrors, props.errors);
+        setFormErrors(newFormErrors);
+    }, [props.errors]);
 
     function handleSubmit(){
         let errors = {};
@@ -18,7 +23,9 @@ function FormComplete(props){
             }
         }
 
-        setFormErrors(errors);
+        let newErrors = {...Object.assign(formErrors, errors)};
+
+        setFormErrors(newErrors);
 
         if(Object.keys(errors).length > 0){
             return;
@@ -27,14 +34,31 @@ function FormComplete(props){
         props.onSubmit(formValue);
     }
 
-    function handleChange(value){
-        setFormValue(value);
+    function findChangedKey(oldValues, newValues){
+        for(let key in newValues){
+            if(oldValues[key] !== newValues[key]){
+                return key;
+            }
+        }
+        return null;
+    }
+
+    function removeError(key){
+        let newErrors = {...formErrors};
+        delete newErrors[key];
+        setFormErrors(newErrors);
+    }
+
+    function handleChange(newValue){
+        let keyChanged = findChangedKey(formValue, newValue);
+        removeError(keyChanged);
+        setFormValue(newValue);
     }
 
     return (
     <div className="w-full">
         <h1 className="p-2 text-2xl">{form.formName}</h1>
-        <FormInputs form={form} errors={allErrors} value={formValue} onChange={handleChange}/>
+        <FormInputs form={form} errors={formErrors} value={formValue} onChange={handleChange}/>
         <button type="button" className="btn btn-success w-full px-2 my-5" onClick={handleSubmit}>Submit form</button>
     </div>
     );
