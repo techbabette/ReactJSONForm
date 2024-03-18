@@ -1,5 +1,6 @@
 import FormInputs from "./FormInputs";
 import { useState, useEffect  } from "react";
+import findChangedKey from "./lib/findChangedKey";
 function FormComplete(props){
     let [formValue, setFormValue] = useState({});
     let [formErrors, setFormErrors] = useState({});
@@ -32,15 +33,6 @@ function FormComplete(props){
         }
 
         props.onSubmit(formValue);
-    }
-
-    function findChangedKey(oldValues, newValues){
-        for(let key in newValues){
-            if(oldValues[key] !== newValues[key]){
-                return key;
-            }
-        }
-        return null;
     }
 
     function removeError(key){
