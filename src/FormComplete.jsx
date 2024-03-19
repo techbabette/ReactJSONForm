@@ -1,6 +1,7 @@
 import FormInputs from "./FormInputs";
 import { useState, useEffect  } from "react";
 import findChangedKey from "./lib/findChangedKey";
+import checkFormFieldsAll from "./lib/checkFormFieldsAll";
 function FormComplete(props){
     let [formValue, setFormValue] = useState({});
     let [formErrors, setFormErrors] = useState({});
@@ -14,19 +15,8 @@ function FormComplete(props){
     }, [props.errors]);
 
     function handleSubmit(){
-        let errors = {};
-
-        let requiredFieldKeys = Object.keys(form.formElements).filter((key) => form.formElements[key]['required'] === true);
-
-        for(let key of requiredFieldKeys){
-            if(!formValue[key] || formValue[key].length === 0){
-                errors[key] = "This field cannot be empty";
-            }
-        }
-
-        let newErrors = {...Object.assign(formErrors, errors)};
-
-        setFormErrors(newErrors);
+        let errors = checkFormFieldsAll(form.formElements, formValue);
+        setFormErrors(errors);
 
         if(Object.keys(errors).length > 0){
             return;
