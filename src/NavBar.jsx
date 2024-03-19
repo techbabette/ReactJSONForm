@@ -9,15 +9,6 @@ function NavBar(props){
         setShowDropdown(!showDropdown);
     }
 
-    function swapTheme(){
-        console.log("clicked");
-        if(theme === "night"){
-            setTheme("light");
-        }else{
-            setTheme("night");
-        }
-    }
-
     return(
     <nav className="navbar bg-base-200 border-b-2 flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="flex-1">
