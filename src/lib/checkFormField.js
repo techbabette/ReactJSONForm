@@ -1,10 +1,14 @@
 function checkFormField(field, value){
     if(!field.required && !field.regex){
-        return false;
+        return null;
     }
 
     if(field.regex){
-        if(!field.regex.test(value)){
+        let flagIndex = field.regex.lastIndexOf("/");
+        let regex = field.regex.substring(1, flagIndex);
+        let flags = field.regex.substring(flagIndex + 1);
+        regex = new RegExp(regex, flags);
+        if(!regex.test(value)){
             return "Value does not match format"
         }
     }
@@ -15,5 +19,7 @@ function checkFormField(field, value){
         }
     }
 
-    return false;
+    return null;
 }
+
+export default checkFormField;
