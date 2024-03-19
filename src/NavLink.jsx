@@ -10,10 +10,10 @@ function NavLink(props){
         let active = linkActive();
         
         if(active){
-            return returnClass + " px-2 text-primary"
+            return returnClass + " px-2 mk-text-center text-primary"
         }
     
-        return returnClass + " px-2"
+        return returnClass + " px-2 mk-text-center"
     }
 
     return (
