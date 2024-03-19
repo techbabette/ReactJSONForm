@@ -2,6 +2,7 @@ import FormInputs from "./FormInputs";
 import { useState, useEffect  } from "react";
 import findChangedKey from "./lib/findChangedKey";
 import checkFormFieldsAll from "./lib/checkFormFieldsAll";
+import checkFormField from "./lib/checkFormField";
 function FormComplete(props){
     let [formValue, setFormValue] = useState({});
     let [formErrors, setFormErrors] = useState({});
@@ -31,9 +32,21 @@ function FormComplete(props){
         setFormErrors(newErrors);
     }
 
+    function addError(key, error){
+        let newErrors = {};
+        Object.assign(newErrors, formErrors);
+        newErrors[key] = error;
+        setFormErrors(newErrors);
+    }
+
     function handleChange(newValue){
         let keyChanged = findChangedKey(formValue, newValue);
-        removeError(keyChanged);
+        let error = checkFormField(form.formElements[keyChanged], newValue[keyChanged]);
+        if(!error){
+            removeError(keyChanged);
+        }else{
+            addError(keyChanged, error);
+        }
         setFormValue(newValue);
     }
 
