@@ -4,12 +4,16 @@ import './index.css'
 import { RouterProvider } from 'react-router-dom'
 import router from './router/router'
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import store from "./redux/store";
+import { Provider } from 'react-redux'
+
+import ToastContainer from './toast/ToastContainer'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
-    <ToastContainer position="bottom-right" theme="dark" autoClose={5000} closeOnClick/>
+    <Provider store={store}>
+      <RouterProvider router={router}/>
+      <ToastContainer/>
+    </Provider>
   </React.StrictMode>,
 )
