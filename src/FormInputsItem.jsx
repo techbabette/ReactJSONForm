@@ -21,7 +21,11 @@ function FormInputsItem(props){
         label = false;
     }
 
-    let error = <span className="alert alert-warning my-2">{props.error}</span>
+    let error = <span className="alert alert-warning mb-2 rounded-t-none">{props.error}</span>
+
+    if(props.error){
+        inputClass += " rounded-b-none"
+    }
 
     let handleInputChange = function(value){
         props.onChange(value);
