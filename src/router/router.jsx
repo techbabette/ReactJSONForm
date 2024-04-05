@@ -5,6 +5,7 @@ import PageWelcome from "../PageWelcome";
 import PageForm from "../PageForm";
 import PageLogin from "../PageLogin";
 import PageRegister from "../PageRegister";
+import PageFormNew from "../PageFormNew";
 
 const router = createBrowserRouter([
     {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
     },
     {
         path: "form/new",
-        element: <PageWelcome/>
+        element: <PageFormNew/>
     },
     {
         path: "form/:id",
