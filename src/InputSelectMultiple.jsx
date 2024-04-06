@@ -48,10 +48,10 @@ function InputSelectMultiple(props){
     }
 
     return (
-    <div className={"dropdown " + props.className}>
+    <div className={"dropdown"}>
         <label tabIndex={id} htmlFor={id} role="button" className="w-full">{props.label}</label>
-        <div tabIndex={id} role="button" className="input input-bordered m-1 w-full flex items-center">{hint}</div>
-        <ul tabIndex={id} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 w-full rounded-box">
+        <div tabIndex={id} role="button" className={"input input-bordered mt-1 w-full flex items-center " + props.className}>{hint}</div>
+        <ul tabIndex={id} className="dropdown-content z-[1] menu shadow bg-base-100 w-full rounded-lg rounded-t-none">
             {options}
         </ul>
     </div>
