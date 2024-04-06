@@ -60,7 +60,7 @@ function PageForm() {
     <>
     <NavBar links={links}/>
 
-    <div className='w-11/12 md:w-6/12 mx-auto'>
+    <div className='w-11/12 md:w-6/12 mx-auto solo-page flex justify-center items-center'>
       <FormComplete form={formJSON} onSubmit={helloWorld}/>
     </div>
     </>
