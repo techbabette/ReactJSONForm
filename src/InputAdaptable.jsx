@@ -3,27 +3,27 @@ import InputSelectMultiple from "./InputSelectMultiple";
 function InputAdaptable(props){
     let id = props.id ?? Math.floor(Math.random() * 5000);
 
-    let inputField = <input type="text" name={id} id={id} />;
+    let inputField = <input type="text" name={id} id={id} placeholder={props.placeholder ?? ""}/>;
 
     let className = props.className;
     if(props.type === "text"){
         className += " input input-bordered"
-        inputField = <input type="text" name={id} id={id} />
+        inputField = <input type="text" name={id} id={id} placeholder={props.placeholder ?? ""}/>
     }
 
     if(props.type === "password"){
         className += " input input-bordered"
-        inputField = <input type="password" name={id} id={id} />
+        inputField = <input type="password" name={id} id={id} placeholder={props.placeholder ?? ""}/>
     }
 
     if(props.type === "email"){
         className += " input input-bordered"
-        inputField = <input type="email" name={id} id={id} />
+        inputField = <input type="email" name={id} id={id} placeholder={props.placeholder ?? ""}/>
     }
 
     if(props.type === "number"){
         className += " input input-bordered"
-        inputField = <input type="number" name={id} id={id} />
+        inputField = <input type="number" name={id} id={id} placeholder={props.placeholder ?? ""}/>
     }
 
     if(props.type === "select"){

@@ -3,6 +3,7 @@ import FormInputsItem from "./FormInputsItem";
 import { useState } from "react";
 import NavBar from "./NavBar";
 import InputAdaptable from "./InputAdaptable";
+import FormEditorField from "./FormEditorField";
 function PageFormNew(){
     let [form, setForm] = new useState(
         {
@@ -36,10 +37,7 @@ function PageFormNew(){
     let formFields = formFieldsIDs.map((fieldId) => {
         let formElement = form.formElements[fieldId];
         return (
-            <div className="flex flex-col">
-                <label>{formElement.label}</label>
-                <InputAdaptable type="text" placeholder="Field name"/>
-            </div>
+            <FormEditorField id={fieldId} element={formElement} form={form} setForm={setForm} formTypeOptions={["text"]}/>
         )
     }) 
 
