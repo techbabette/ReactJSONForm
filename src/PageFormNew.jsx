@@ -31,6 +31,18 @@ function PageFormNew(){
         setForm(newForm);
     }
 
+    let formFieldsIDs = Object.keys(form.formElements);
+
+    let formFields = formFieldsIDs.map((fieldId) => {
+        let formElement = form.formElements[fieldId];
+        return (
+            <div className="flex flex-col">
+                <label>{formElement.label}</label>
+                <InputAdaptable type="text" placeholder="Field name"/>
+            </div>
+        )
+    }) 
+
     return (
         <>
         <NavBar/>
@@ -42,6 +54,7 @@ function PageFormNew(){
         <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-1/2 p-2 solo-page">
             <h2 className="text-4xl">Form fields</h2>
+            {formFields}
         </div>
         <div className="w-full md:w-1/2 border-t-2 md:border-t-0 md:border-l-2 p-2 solo-page">
             <h2 className="text-4xl p-2">Form preview</h2>
