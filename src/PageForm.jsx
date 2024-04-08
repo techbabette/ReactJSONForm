@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import FormComplete from './FormComplete'
 import NavBar from './NavBar';
 import NavLink from './NavLink';
 import axios from './axios/axios';
 import { useParams } from 'react-router-dom';
+import getFormFromResponse from './lib/formFromResponse';
 
 let formJSON = {
   formId : 1,
@@ -72,17 +73,25 @@ let formJSON = {
 }
 
 function PageForm() {
+  let {id} = useParams();
+  let [form, setForm] = useState({});
+
   function helloWorld(data){
     console.log("Hello world");
     console.log(data);
   }
 
-  let {id} = useParams();
 
   useEffect(() => {
     async function loadForm() {
       let result = await axios.get(`/form/${id}`);
-      console.log(result.data.body);
+      console.log(result);
+      if(result.success){
+        setForm(getFormFromResponse(result.data.body));
+        return;
+      }
+
+      setForm(formJSON);
     }
 
     loadForm();
@@ -95,7 +104,7 @@ function PageForm() {
     <NavBar links={links}/>
 
     <div className='w-11/12 md:w-6/12 mx-auto solo-page flex justify-center items-center'>
-      <FormComplete form={formJSON} onSubmit={helloWorld}/>
+      <FormComplete form={form} onSubmit={helloWorld}/>
     </div>
     </>
   )
