@@ -16,6 +16,16 @@ function FormEditorField(props){
         setForm(currentForm);
     }
 
+    let changeType = function(newTypeId){
+        let currentShape = {...element};
+        currentShape.type = props.formTypeOptions.filter((x) => x.id == newTypeId)[0];
+
+        let currentForm = {...form};
+        currentForm.formElements[id] = currentShape;
+
+        setForm(currentForm);
+    }
+
     return (
     <div className="flex flex-row flex-wrap border bg-base-200 rounded-lg p-2 my-2">
         <div className="flex flex-col w-8/12 border-1 border-base-300">
@@ -24,7 +34,8 @@ function FormEditorField(props){
         </div>
         <div className="w-4/12">
             <label  className="">Field type</label>
-            <InputAdaptable className="w-full bg-base-200 " type="select" options={formTypeOptions} value={element.type}/>
+            <InputAdaptable className="w-full bg-base-200 " type="select" options={formTypeOptions} option_value_field="id" option_text_field="text" 
+            onChange={changeType} value={element.type.id}/>
         </div>
         <div className="w-full">
             <label  className="">Regex (optional)</label>

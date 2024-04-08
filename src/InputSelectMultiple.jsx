@@ -17,7 +17,7 @@ function InputSelectMultiple(props){
     let option_value_field = props.option_value_field ?? "__";
     let option_text_field = props.option_text_field ?? "__";
 
-    let options = props.options.map((option, index) => {
+    let options = props.options?.map((option, index) => {
         let option_value = option_value_field === "__" ? option : option[option_value_field];
         let option_text = option_text_field === "__" ? option : option[option_text_field];
 

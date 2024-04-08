@@ -33,7 +33,7 @@ function InputAdaptable(props){
 
         let hintOption = <option value={0} disabled={true}>{props.hint ?? "Select one"}</option>
 
-        let options = props.options.map((option, index) => {
+        let options = props.options?.map((option, index) => {
             let option_value = option_value_field === "__" ? option : option[option_value_field];
             let option_text = option_text_field === "__" ? option : option[option_text_field];
             return <option key={index} value={option_value}>{option_text}</option>;

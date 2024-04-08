@@ -1,9 +1,10 @@
 import FormComplete from "./FormComplete";
 import FormInputsItem from "./FormInputsItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import InputAdaptable from "./InputAdaptable";
 import FormEditorField from "./FormEditorField";
+import axios from "./axios/axios";
 function PageFormNew(){
     let [form, setForm] = new useState(
         {
@@ -11,8 +12,12 @@ function PageFormNew(){
             formName : "New form",
             formDirection : "row",
             formElements : {
-                2 : {
-                    type : "text",
+                1 : {
+                    type : {
+                        id : 1,
+                        text : 'Text',
+                        type : 'text'
+                    },
                     label : "First field",
                     required : true,
                     width : 12,
@@ -21,6 +26,19 @@ function PageFormNew(){
             }
         }
     );
+    let [formTypeOptions, setFormTypeOptions] = new useState([]);
+
+    useEffect(() => {
+        async function loadFormTypes() {
+            let result = await axios.get('/input');
+            console.log(result.data.body);
+            if(result.success){
+                setFormTypeOptions(result.data.body);
+            }
+        }
+
+        console.log(loadFormTypes());
+    }, [])
 
     let dummySubmit = function(data){
         console.log("Successfully submitted form");
@@ -37,7 +55,7 @@ function PageFormNew(){
     let formFields = formFieldsIDs.map((fieldId) => {
         let formElement = form.formElements[fieldId];
         return (
-            <FormEditorField id={fieldId} element={formElement} form={form} setForm={setForm} formTypeOptions={["text"]}/>
+            <FormEditorField id={fieldId} element={formElement} form={form} setForm={setForm} formTypeOptions={formTypeOptions}/>
         )
     }) 
 
