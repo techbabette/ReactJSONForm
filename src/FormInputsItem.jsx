@@ -4,7 +4,7 @@ function FormInputsItem(props){
     let id = props.id ?? Math.floor(Math.random() * 5000);
 
     let width = "";
-    if(props.width !== 12){
+    if(props.width != 12){
         width = `w-${props.width}\/12`;
     }else{
         width = `w-full`;
