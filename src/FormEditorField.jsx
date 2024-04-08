@@ -32,6 +32,8 @@ function FormEditorField(props){
         setForm(currentForm);
     }
 
+    let elementTypesWithRegex = ['text'];
+
     return (
     <div className="flex flex-row flex-wrap border bg-base-200 rounded-lg p-2 my-2">
         <div className="flex flex-col w-6/12 border-1 border-base-300">
@@ -47,10 +49,11 @@ function FormEditorField(props){
             <label  className="">Width</label>
             <InputAdaptable className="w-full bg-base-200 " type="number" onChange={changeWidth} value={element.width}/>
         </div>
+        {elementTypesWithRegex.includes(element.type.type) && 
         <div className="w-full">
             <label  className="">Regex (optional)</label>
             <InputAdaptable className="w-full bg-base-200 " type="text" placeholder="/^[a-z]$/"/>
-        </div>
+        </div>}
     </div>
     )
 }
