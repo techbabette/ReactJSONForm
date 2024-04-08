@@ -5,7 +5,15 @@ import NavBar from "./NavBar";
 import InputAdaptable from "./InputAdaptable";
 import FormEditorField from "./FormEditorField";
 import axios from "./axios/axios";
+
 function PageFormNew(){
+    let [defaultFieldType, setDefaultFieldType] = new useState(
+        {
+            id : 1,
+            text : 'Text',
+            type : 'text'
+        }
+    )
     let [form, setForm] = new useState(
         {
             formId : 1,
@@ -21,11 +29,12 @@ function PageFormNew(){
                     label : "First field",
                     required : true,
                     width : 12,
-                    weight : 99
+                    weight : 100
                 },
             }
         }
     );
+
     let [formTypeOptions, setFormTypeOptions] = new useState([]);
 
     useEffect(() => {
@@ -34,6 +43,7 @@ function PageFormNew(){
             console.log(result.data.body);
             if(result.success){
                 setFormTypeOptions(result.data.body);
+                setDefaultFieldType(result.data.body[0]);
             }
         }
 
@@ -55,7 +65,7 @@ function PageFormNew(){
     let formFields = formFieldsIDs.map((fieldId) => {
         let formElement = form.formElements[fieldId];
         return (
-            <FormEditorField id={fieldId} element={formElement} form={form} setForm={setForm} formTypeOptions={formTypeOptions}/>
+            <FormEditorField key={fieldId} id={fieldId} element={formElement} form={form} setForm={setForm} formTypeOptions={formTypeOptions}/>
         )
     }) 
 
