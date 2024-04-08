@@ -6,29 +6,25 @@ function FormEditorField(props){
     let formTypeOptions = props.formTypeOptions ?? [];
     let id = props.id;
 
-    let changeName = function(newValue){
-        let currentShape = {...element};
-        currentShape.label = newValue;
-
-        let currentForm = {...form};
-        currentForm.formElements[id] = currentShape;
-
-        setForm(currentForm);
+    let changeCurrentElement = function(attribute){
+        return function(newValue){
+            let currentShape = {...element};
+            currentShape[attribute] = newValue;
+    
+            let currentForm = {...form};
+            currentForm.formElements[id] = currentShape;
+    
+            setForm(currentForm);
+        }
     }
+
+    let changeName = changeCurrentElement('label');
+
+    let changeWidth = changeCurrentElement('width');
 
     let changeType = function(newTypeId){
         let currentShape = {...element};
         currentShape.type = props.formTypeOptions.filter((x) => x.id == newTypeId)[0];
-
-        let currentForm = {...form};
-        currentForm.formElements[id] = currentShape;
-
-        setForm(currentForm);
-    }
-
-    let changeWidth = function(newWidth){
-        let currentShape = {...element};
-        currentShape.width = newWidth;
 
         let currentForm = {...form};
         currentForm.formElements[id] = currentShape;
