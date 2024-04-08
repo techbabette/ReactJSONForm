@@ -17,11 +17,11 @@ function FormInputs(props){
         let currentInput = formJSON.formElements[key];
         let defaultValue = "";
 
-        if(currentInput.type === "select"){
+        if(currentInput.type.type === "select"){
             defaultValue = 0;
         }
 
-        if(currentInput.type === "select_multiple"){
+        if(currentInput.type.type === "select_multiple"){
             defaultValue = [];
         }
 

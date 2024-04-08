@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
 import FormComplete from './FormComplete'
 import NavBar from './NavBar';
 import NavLink from './NavLink';
+import axios from './axios/axios';
+import { useParams } from 'react-router-dom';
 
 let formJSON = {
   formId : 1,
@@ -8,28 +11,44 @@ let formJSON = {
   formDirection : "row",
   formElements : {
       2 : {
-          type : "text",
+          type : {
+            id: 1,
+            text : "Text",
+            type: "text"
+          },
           label : "Last name",
           required : true,
           width : 6,
           weight : 99
       },
       3 : {
-          type : "email",
+          type : {
+            id: 2,
+            text : "Email",
+            type: "email"
+          },
           label : "Email",
           required : true,
           width : 12,
           weight : 98
       },
       1 : {
-          type : "text",
+          type : {
+            id: 1,
+            text : "Text",
+            type: "text"
+          },
           label : "First name",
           required : true,
           width : 6,
           weight : 100,
       },
       4 : {
-          type : "select",
+          type : {
+            id: 3,
+            text : "Select",
+            type: "select"
+          },
           label : "Select city",
           required : true,
           width : 12,
@@ -37,7 +56,11 @@ let formJSON = {
           options : ["Belgrade", "Novi sad", "Nis"]
       },
       5 : {
-          type : "select_multiple",
+          type : {
+            id: 3,
+            text : "Select multiple",
+            type: "select_multiple"
+          },
           label : "Select classes",
           required : true,
           hint : "Select multiple",
@@ -53,6 +76,17 @@ function PageForm() {
     console.log("Hello world");
     console.log(data);
   }
+
+  let {id} = useParams();
+
+  useEffect(() => {
+    async function loadForm() {
+      let result = await axios.get(`/form/${id}`);
+      console.log(result.data.body);
+    }
+
+    loadForm();
+  }, [])
 
   let links = <NavLink to="form/new" text="Make your own form here" className="text-accent"/>
 

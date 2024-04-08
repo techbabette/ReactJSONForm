@@ -17,7 +17,7 @@ function FormInputsItem(props){
         label = <label htmlFor={id} className="py-1">{props.label}</label>
     }
 
-    if(props.type === "select_multiple"){
+    if(props.type.type === "select_multiple"){
         label = false;
     }
 
@@ -35,7 +35,7 @@ function FormInputsItem(props){
     <div className={width + " flex flex-col justify-center content-center px-4"}>
         {label && label}
         <InputAdaptable onChange={handleInputChange} 
-        value={props.value} className={inputClass} id={id} {...props}/>
+        value={props.value} className={inputClass} id={id} {...props} type={props.type.type}/>
         {props.error && error}
     </div>
     );
