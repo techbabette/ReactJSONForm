@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 function InputSelectMultiple(props){
     let id = props.id ?? Math.floor(Math.random() * 5000);
 
@@ -13,6 +15,32 @@ function InputSelectMultiple(props){
         }
         props.onChange(currentArray);
     }
+
+    function getSelectedValues(){
+        let selectedValues = [];
+        props.options?.forEach((option)  => {
+            let optionValue;
+            if(option_text_field === "__" && option_value_field === "__"){
+                optionValue = option;
+            }else{
+                optionValue = option[option_value_field];
+            }
+
+            if(props.value.includes(optionValue)){
+                selectedValues.push(optionValue);
+            }
+        })
+
+        return selectedValues;
+    }
+
+    useEffect(() => {
+        let selectedValues = getSelectedValues();
+
+        if(selectedValues.length == 0 && props.value.length > 0){
+            props.onChange([]);
+        }    
+    }, [props.options])
 
     let option_value_field = props.option_value_field ?? "__";
     let option_text_field = props.option_text_field ?? "__";
@@ -33,19 +61,9 @@ function InputSelectMultiple(props){
 
     let hint = props.hint ?? "Select multiple";
 
-    if(props.value.length > 0){
-        let hints = [];
-        props.value.forEach((value)  => {
-            if(option_text_field === "__" && option_value_field === "__"){
-                hints.push(value);
-            }else{
-                let option = props.options.filter((el) => el[option_value_field] === value);
-                let optionText = option[option_text_field];
-                hints.push(optionText);
-            }
-        })
-        hint = hints.join(", ");
-    }
+    let selectedValues = getSelectedValues();
+    hint = selectedValues.length > 0 ? selectedValues.join(", ") : hint;
+
 
     return (
     <div className={"dropdown"}>
