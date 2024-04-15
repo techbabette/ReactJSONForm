@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 function InputSelectMultiple(props){
     let id = props.id ?? Math.floor(Math.random() * 5000);
 
@@ -34,14 +32,6 @@ function InputSelectMultiple(props){
         return selectedValues;
     }
 
-    useEffect(() => {
-        let selectedValues = getSelectedValues();
-
-        if(selectedValues.length == 0 && props.value.length > 0){
-            props.onChange([]);
-        }    
-    }, [props.options])
-
     let option_value_field = props.option_value_field ?? "__";
     let option_text_field = props.option_text_field ?? "__";
 
@@ -53,7 +43,7 @@ function InputSelectMultiple(props){
         <li key={index}>
             <label className="label cursor-pointer">
                 <span className="label-text">{option_text}</span> 
-                <input type="checkbox" value={option_value} className="checkbox" onChange={handleChange}/>
+                <input type="checkbox" value={option_value} checked={props.value?.includes(option_value)} className="checkbox" onChange={handleChange}/>
             </label>
         </li>
         )

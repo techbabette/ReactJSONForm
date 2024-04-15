@@ -1,7 +1,26 @@
-import React from "react"
+import React, { useEffect } from "react"
 import InputAdaptable from "./InputAdaptable";
 function FormInputsItem(props){
     let id = props.id ?? Math.floor(Math.random() * 5000);
+
+    useEffect(() => {
+        if(props.value == '0'){
+            return;
+        }
+
+        if(Array.isArray(props.value) && !props.value.length){
+            return;
+        }
+
+        if(props.type.type === 'select'){
+            props.onChange("0");
+        }
+
+        if(props.type.type === 'select_multiple'){
+            props.onChange([]);
+        }
+        
+    }, [props.options])
 
     let width = "";
     if(props.width != 12){

@@ -39,8 +39,7 @@ function FormComplete(props){
         setFormErrors(newErrors);
     }
 
-    function handleChange(newValue){
-        let keyChanged = findChangedKey(formValue, newValue);
+    function handleChange(newValue, keyChanged){
         let error = checkFormField(form.formElements[keyChanged], newValue[keyChanged]);
         if(!error){
             removeError(keyChanged);

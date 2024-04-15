@@ -6,11 +6,11 @@ function FormInputs(props){
 
     let inputKeys = Object.keys(formJSON.formElements);
     let sortedInputKeys = inputKeys.sort((a,b) => formJSON.formElements[b].weight - formJSON.formElements[a].weight);
-
+    
     function handleInputChange(newValue, key){
         let newFormValue = {...props.value};
         newFormValue[key] = newValue;
-        props.onChange(newFormValue);
+        props.onChange(newFormValue, key);
     }
 
     let inputs = sortedInputKeys.map((key) => {
