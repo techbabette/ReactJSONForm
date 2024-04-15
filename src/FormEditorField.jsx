@@ -1,10 +1,20 @@
 import InputAdaptable from "./InputAdaptable";
+import { useEffect } from "react";
 function FormEditorField(props){
     let setForm = props.setForm;
     let form = props.form;
     let element = props.element;
     let formTypeOptions = props.formTypeOptions ?? [];
     let id = props.id;
+
+    const elementTypesWithRegex = ['text'];
+    const elementTypesWithOptions = ['select', 'select_multiple'];
+
+    useEffect(() => {
+        if(elementTypesWithOptions.includes(element.type.type) && !element.options){
+            changeCurrentElement('options')([""]);
+        }
+    }, [element.type.type])
 
     let changeCurrentElement = function(attribute){
         return function(newValue){
@@ -23,16 +33,45 @@ function FormEditorField(props){
     let changeWidth = changeCurrentElement('width');
 
     let changeType = function(newTypeId){
-        let currentShape = {...element};
-        currentShape.type = props.formTypeOptions.filter((x) => x.id == newTypeId)[0];
+        let newType = props.formTypeOptions.filter((x) => x.id == newTypeId)[0];
 
-        let currentForm = {...form};
-        currentForm.formElements[id] = currentShape;
-
-        setForm(currentForm);
+        changeCurrentElement('type')(newType)
     }
 
-    let elementTypesWithRegex = ['text'];
+    let addNewOption = function(){
+        let newOptions = [...element.options];
+        newOptions.push("");
+        changeCurrentElement('options')(newOptions);
+    }
+
+    let changeOption = function(index){
+        return function(newValue){
+            let newOptions = [...element.options];
+            newOptions[index] = newValue;
+
+            changeCurrentElement('options')(newOptions);
+        }
+    }
+
+    let deleteOption = function(index){
+        let newOptions = [...element.options];
+        if(newOptions.length < 2){
+            return;
+        }
+
+        newOptions.splice(index, 1);
+        changeCurrentElement('options')(newOptions);
+    }
+
+    let options = element.options?.map((option, index) => {
+        let onChange = changeOption(index)
+        return (
+            <div key={index} className="w-full my-1">
+                <InputAdaptable type="text" placeholder="New option" onChange={onChange} value={option} className="w-10/12"/>
+                <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-error border-0 rounded-sm">delete</button>
+            </div>
+        )
+    });
 
     return (
     <div className="flex flex-row flex-wrap border bg-base-200 rounded-lg p-2 my-2">
@@ -54,6 +93,12 @@ function FormEditorField(props){
             <label  className="">Regex (optional)</label>
             <InputAdaptable className="w-full bg-base-200 " type="text" placeholder="/^[a-z]$/"/>
         </div>}
+        {elementTypesWithOptions.includes(element.type.type) &&
+        <div className="w-full">
+            {options}
+            <button className="w-full btn btn-success p-4 mt-2" onClick={addNewOption}>Add option</button>
+        </div>
+        }
     </div>
     )
 }
