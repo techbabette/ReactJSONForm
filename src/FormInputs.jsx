@@ -13,6 +13,12 @@ function FormInputs(props){
         props.onChange(newFormValue, key);
     }
 
+    function removeValueOfElement(key){
+        let newFormValue = {...props.value};
+        delete newFormValue[key];
+        props.onChange(newFormValue, key, false);
+    }
+
     let inputs = sortedInputKeys.map((key) => {
         let currentInput = formJSON.formElements[key];
         let defaultValue = "";
@@ -29,7 +35,8 @@ function FormInputs(props){
             handleInputChange(value, key);
         }
         
-        return <FormInputsItem key={key} id={key} error={errors[key]} value={props.value[key] ?? defaultValue} onChange={handler} {...formJSON.formElements[key]}/>
+        return <FormInputsItem key={key} id={key} error={errors[key]} 
+        value={props.value[key] ?? defaultValue} onChange={handler} removeValue={() => removeValueOfElement(key)} {...formJSON.formElements[key]}/>
     }
     )
 

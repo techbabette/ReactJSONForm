@@ -39,7 +39,11 @@ function FormComplete(props){
         setFormErrors(newErrors);
     }
 
-    function handleChange(newValue, keyChanged){
+    function handleChange(newValue, keyChanged, runChecks = true){
+        if(!runChecks){
+            setFormValue(newValue);
+            return;
+        }
         let error = checkFormField(form.formElements[keyChanged], newValue[keyChanged]);
         if(!error){
             removeError(keyChanged);
