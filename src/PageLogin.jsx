@@ -4,14 +4,14 @@ let loginForm = {
     formName : "Login to your Formify account",
     formElements : {
         email : {
-            type : 'text',
+            type : {type : 'text'},
             label : "Email",
             required : true,
             width : 12,
             weight : 100,
         },
         password : {
-            type : 'password',
+            type : {type : 'password'},
             label : "Password",
             required : true,
             width : 12,

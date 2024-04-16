@@ -6,28 +6,28 @@ let registerForm = {
     formName : "Create an account to save your forms",
     formElements : {
         first_name : {
-            type : 'text',
+            type : {type : 'text'},
             label : "First name",
             required : true,
             width : 6,
             weight : 100,
         },
         last_name : {
-            type : 'text',
+            type : {type : 'text'},
             label : "Last name",
             required : true,
             width : 6,
             weight : 100,
         },
         email : {
-            type : 'text',
+            type : {type : 'text'},
             label : "Email",
             required : true,
             width : 12,
             weight : 95,
         },
         password : {
-            type : 'password',
+            type : {type : 'password'},
             label : "Password",
             required : true,
             width : 12,
