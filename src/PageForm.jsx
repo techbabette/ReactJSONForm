@@ -75,6 +75,7 @@ let formJSON = {
 function PageForm() {
   let {id} = useParams();
   let [form, setForm] = useState({});
+  let [loaded, setLoaded] = useState(false);
 
   function helloWorld(data){
     console.log("Hello world");
@@ -88,10 +89,12 @@ function PageForm() {
       console.log(result);
       if(result.success){
         setForm(getFormFromResponse(result.data.body));
+        setLoaded(true);
         return;
       }
 
       setForm(formJSON);
+      setLoaded(true);
     }
 
     loadForm();
@@ -101,11 +104,21 @@ function PageForm() {
 
   return (
     <>
-    <NavBar links={links}/>
 
+    {loaded && 
+    <>
+    <NavBar links={links}/>
     <div className='w-11/12 md:w-6/12 mx-auto solo-page flex justify-center items-center'>
       <FormComplete form={form} onSubmit={helloWorld}/>
     </div>
+    </>}
+    {!loaded && 
+    <div className='w-full h-screen mk-text-center'>
+        <p className='my-2 text-8xl text-primary'>Loading form</p>
+        <span className="loading loading-spinner mx-auto loading-lg"></span>
+    </div>
+
+    }
     </>
   )
 }
