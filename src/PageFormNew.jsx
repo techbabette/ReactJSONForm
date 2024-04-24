@@ -35,6 +35,12 @@ function PageFormNew(){
         }
     );
 
+    let setFormAndSave = function(newFormState){
+        setForm(newFormState);
+
+        localStorage.setItem('newFormState', JSON.stringify(newFormState));
+    }
+
     let [formTypeOptions, setFormTypeOptions] = new useState([]);
 
     useEffect(() => {
@@ -57,7 +63,7 @@ function PageFormNew(){
     let changeName = function(newValue){
         let newForm = {...form};
         newForm.formName = newValue;
-        setForm(newForm);
+        setFormAndSave(newForm);
     }
 
     let formFieldsIDs = Object.keys(form.formElements);
@@ -65,7 +71,7 @@ function PageFormNew(){
     let formFields = formFieldsIDs.map((fieldId) => {
         let formElement = form.formElements[fieldId];
         return (
-            <FormEditorField key={fieldId} id={fieldId} element={formElement} form={form} setForm={setForm} formTypeOptions={formTypeOptions}/>
+            <FormEditorField key={fieldId} id={fieldId} element={formElement} form={form} setForm={setFormAndSave} formTypeOptions={formTypeOptions}/>
         )
     }) 
 
@@ -92,7 +98,7 @@ function PageFormNew(){
 
         console.log(fieldIdsAsNumbers);
 
-        setForm(formCopy);
+        setFormAndSave(formCopy);
     }
 
     let newFieldButton = (<button className="w-full btn btn-success p-4" onClick={addNewField}>New field</button>)
