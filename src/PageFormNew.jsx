@@ -14,7 +14,7 @@ function PageFormNew(){
             type : 'text'
         }
     )
-    let [form, setForm] = new useState(
+    let [form, setForm] = new useState(JSON.parse(localStorage.getItem('newFormState') ||
         {
             formId : 1,
             formName : "New form",
@@ -33,7 +33,7 @@ function PageFormNew(){
                 },
             }
         }
-    );
+    ));
 
     let setFormAndSave = function(newFormState){
         setForm(newFormState);
