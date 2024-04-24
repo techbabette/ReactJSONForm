@@ -23,7 +23,7 @@ function FormInputsItem(props){
     }, [props.options])
 
     useEffect(() => {
-        props.removeValue();
+        props.remove_value();
     }, [props.type.type])
 
     let width = "";

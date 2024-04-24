@@ -36,7 +36,7 @@ function FormInputs(props){
         }
         
         return <FormInputsItem key={key} id={key} error={errors[key]} 
-        value={props.value[key] ?? defaultValue} onChange={handler} removeValue={() => removeValueOfElement(key)} {...formJSON.formElements[key]}/>
+        value={props.value[key] ?? defaultValue} onChange={handler} remove_value={() => removeValueOfElement(key)} {...formJSON.formElements[key]}/>
     }
     )
 
