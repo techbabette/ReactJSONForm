@@ -54,11 +54,13 @@ function FormInputsItem(props){
         props.onChange(value);
     }
 
+    let {remove_value, propsToSendDown} = props
+
     return (
     <div className={width + " flex flex-col justify-center content-center px-4"}>
         {label && label}
         <InputAdaptable onChange={handleInputChange} 
-        value={props.value} className={inputClass} id={id} {...props} type={props.type.type}/>
+        value={props.value} className={inputClass} id={id} {...propsToSendDown} type={props.type.type}/>
         {props.error && error}
     </div>
     );
