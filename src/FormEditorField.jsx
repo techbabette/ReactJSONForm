@@ -1,5 +1,6 @@
 import InputAdaptable from "./InputAdaptable";
 import { useEffect } from "react";
+import { Icon } from "@iconify/react/dist/iconify.js";
 function FormEditorField(props){
     let setForm = props.setForm;
     let form = props.form;
@@ -75,12 +76,21 @@ function FormEditorField(props){
 
     return (
     <div className="flex flex-row flex-wrap border bg-base-200 rounded-lg p-2 my-2">
+        <div className="flex flex-row w-full border-1 border-base-300">
+            <div className="w-6/12">
+                <button><Icon className="text-error text-xl" icon="mdi:trash"/></button>
+            </div>
+            <div className="w-6/12 text-right">
+                <button className="px-1">&uarr;</button>
+                <button>&darr;</button>
+            </div>
+        </div>
         <div className="flex flex-col w-6/12 border-1 border-base-300">
             <label className="">Field name</label>
             <InputAdaptable className="bg-base-200 " type="text" placeholder="Field name" onChange={changeName} value={element.label}/>
         </div>
         <div className="w-4/12">
-            <label  className="">Field type</label>
+            <label className="">Field type</label>
             <InputAdaptable className="w-full bg-base-200 " type="select" options={formTypeOptions} option_value_field="id" option_text_field="text" 
             onChange={changeType} value={element.type.id}/>
         </div>
