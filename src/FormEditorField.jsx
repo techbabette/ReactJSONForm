@@ -39,6 +39,13 @@ function FormEditorField(props){
         changeCurrentElement('type')(newType)
     }
 
+    let deleteField = function(){
+        let currentForm = {...form};
+        delete currentForm.formElements[id];
+
+        setForm(currentForm);
+    }
+
     let addNewOption = function(){
         let newOptions = [...element.options];
         newOptions.push("");
@@ -78,7 +85,7 @@ function FormEditorField(props){
     <div className="flex flex-row flex-wrap border bg-base-200 rounded-lg p-2 my-2">
         <div className="flex flex-row w-full border-1 border-base-300">
             <div className="w-6/12">
-                <button><Icon className="text-error text-xl" icon="mdi:trash"/></button>
+                <button><Icon onClick={deleteField} className="text-error text-xl" icon="mdi:trash"/></button>
             </div>
             <div className="w-6/12 text-right">
                 <button className="px-1">&uarr;</button>
