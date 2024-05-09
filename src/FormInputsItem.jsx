@@ -13,11 +13,11 @@ function FormInputsItem(props){
         }
 
         if(props.type.type === 'select'){
-            props.onChange("0");
+            props.remove_value();
         }
 
         if(props.type.type === 'select_multiple'){
-            props.onChange([]);
+            props.remove_value();
         }
         
     }, [props.options])
