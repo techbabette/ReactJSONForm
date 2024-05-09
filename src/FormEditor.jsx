@@ -9,7 +9,9 @@ export default function FormEditor(props){
     let form = props.form;
     let setForm = props.setForm;
 
-    let formFieldsIDs = Object.keys(form.formElements);
+    let formFieldsIDs = Object.keys(form.formElements).sort(function(a, b){
+        return form.formElements[b].weight - form.formElements[a].weight;
+    });
 
     let formFields = formFieldsIDs.map((fieldId) => {
         let formElement = form.formElements[fieldId];
@@ -28,7 +30,7 @@ export default function FormEditor(props){
         let minimumWeight = 50000;
         for(let index of Object.keys(formCopy.formElements)){
             let element = formCopy.formElements[index];
-            if(element.weight < minimumWeight){
+            if(element.weight <= minimumWeight){
                 minimumWeight = element.weight - 5;
             }
         }

@@ -31,7 +31,6 @@ function PageFormNew(){
     }, [])
 
     let loadInitialForm = async function(){
-        if(fieldTypesLoaded === false) return;
         if(localStorage.getItem('newFormState')) {
             setForm(JSON.parse(localStorage.getItem("newFormState")));
             return;

@@ -1,6 +1,7 @@
 import InputAdaptable from "./InputAdaptable";
 import { useEffect } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import findNextFieldByWeight from "./lib/findFieldWithNextLowestWeight";
 function FormEditorField(props){
     let setForm = props.setForm;
     let form = props.form;
@@ -42,6 +43,26 @@ function FormEditorField(props){
     let deleteField = function(){
         let currentForm = {...form};
         delete currentForm.formElements[id];
+
+        setForm(currentForm);
+    }
+
+    let moveField = function(direction){
+        let fieldToSwapWithIndex = findNextFieldByWeight(form, parseInt(id), direction);
+
+        if(!fieldToSwapWithIndex) return;
+
+        let thisFieldShape = {...element};
+        let fieldToSwapWithShape = {...form.formElements[fieldToSwapWithIndex]}
+
+        thisFieldShape['weight'] += fieldToSwapWithShape['weight']; 
+        fieldToSwapWithShape['weight'] = thisFieldShape['weight'] - fieldToSwapWithShape['weight'];
+        thisFieldShape['weight'] -= fieldToSwapWithShape['weight']; 
+        
+        let currentForm = {...form};
+
+        currentForm.formElements[id] = thisFieldShape;
+        currentForm.formElements[fieldToSwapWithIndex] = fieldToSwapWithShape;
 
         setForm(currentForm);
     }
@@ -88,8 +109,9 @@ function FormEditorField(props){
                 <button><Icon onClick={deleteField} className="text-error text-xl" icon="mdi:trash"/></button>
             </div>
             <div className="w-6/12 text-right">
-                <button className="px-1">&uarr;</button>
-                <button>&darr;</button>
+                <button className="mx-1" onClick={() => moveField("higher")}>&uarr;</button>
+                <button onClick={() => moveField("lower")}>&darr;</button>
+                {element.weight}
             </div>
         </div>
         <div className="flex flex-col w-6/12 border-1 border-base-300">
