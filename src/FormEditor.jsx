@@ -24,9 +24,13 @@ export default function FormEditor(props){
 
     let addNewField = function(){
         let formCopy = {...form};
+        let newFieldId = 1;
         let fieldIdsAsNumbers = Object.keys(formCopy.formElements).map((key) => parseInt(key));
-        let maxFieldId = Math.max(...fieldIdsAsNumbers);
-        let newFieldId = maxFieldId + 1;
+        if(fieldIdsAsNumbers.length > 0){
+            let maxFieldId = Math.max(...fieldIdsAsNumbers);
+            newFieldId = maxFieldId + 1;
+        }
+
         let minimumWeight = 50000;
         for(let index of Object.keys(formCopy.formElements)){
             let element = formCopy.formElements[index];
