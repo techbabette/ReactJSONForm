@@ -1,40 +1,22 @@
-import { useEffect, useState } from "react";
 import FormEditorField from "./FormEditorField";
 import InputAdaptable from "./InputAdaptable";
 import FormComplete from "./FormComplete";
-import axios from "./axios/axios";
 
 export default function FormEditor(props){
-    let [defaultFieldType, setDefaultFieldType] = new useState(
-        {
-            id : 1,
-            text : 'Text',
-            type : 'text'
-        }
-    )
-
-    let [formTypeOptions, setFormTypeOptions] = new useState([]);
+    let defaultFieldType = props.defaultFieldType;
+    let formTypeOptions = props.formTypeOptions;
 
     let form = props.form;
     let setForm = props.setForm;
-
-    useEffect(() => {
-        async function loadFormTypes() {
-            let result = await axios.get('/input');
-            if(result.success){
-                setFormTypeOptions(result.data.body);
-                setDefaultFieldType(result.data.body[0]);
-            }
-        }
-        loadFormTypes();
-    }, [])
 
     let formFieldsIDs = Object.keys(form.formElements);
 
     let formFields = formFieldsIDs.map((fieldId) => {
         let formElement = form.formElements[fieldId];
         return (
-            <FormEditorField key={fieldId} id={fieldId} element={formElement} form={form} setForm={setForm} formTypeOptions={formTypeOptions}/>
+            <FormEditorField key={fieldId} id={fieldId} element={formElement}
+            form={form} setForm={setForm}
+            formTypeOptions={formTypeOptions}/>
         )
     }) 
 
