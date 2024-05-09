@@ -4,22 +4,7 @@ function FormInputsItem(props){
     let id = props.id ?? Math.floor(Math.random() * 5000);
 
     useEffect(() => {
-        if(props.value == '0'){
-            return;
-        }
-
-        if(Array.isArray(props.value) && !props.value.length){
-            return;
-        }
-
-        if(props.type.type === 'select'){
-            props.remove_value();
-        }
-
-        if(props.type.type === 'select_multiple'){
-            props.remove_value();
-        }
-        
+        props.remove_value();
     }, [props.options])
 
     useEffect(() => {
