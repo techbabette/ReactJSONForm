@@ -19,16 +19,14 @@ function PageFormNew(){
             if(result.success){
                 setFormTypeOptions(result.data.body);
                 setDefaultFieldType(result.data.body[0]);
-                if(localStorage.getItem('newFormState')) {
-                    setForm(JSON.parse(localStorage.getItem("newFormState")));
-                }
-                else{
-                    await loadInitialForm();
-                }
             }
         }
         loadFormTypes();
     }, [])
+
+    useEffect(() => {
+        loadInitialForm();
+    }, [defaultFieldType])
 
     let loadInitialForm = async function(){
         if(localStorage.getItem('newFormState')) {
