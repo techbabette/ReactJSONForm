@@ -40,10 +40,11 @@ function InputSelectMultiple(props){
         let option_text = option_text_field === "__" ? option : option[option_text_field];
 
         return (
-        <li key={index}>
+        <li className="overflow-hidden text-wrap" key={index}>
             <label className="label cursor-pointer">
                 <span className="label-text">{option_text}</span> 
-                <input type="checkbox" value={option_value} checked={props.value?.includes(option_value)} className="checkbox" onChange={handleChange}/>
+                <input type="checkbox" value={option_value} checked={props.value?.includes(option_value)} 
+                className="checkbox" onChange={handleChange}/>
             </label>
         </li>
         )
@@ -56,10 +57,13 @@ function InputSelectMultiple(props){
 
 
     return (
-    <div className={"dropdown"}>
+    <div className={"dropdown w-full"}>
         <label tabIndex={id} htmlFor={id} role="button" className="w-full">{props.label}</label>
-        <div tabIndex={id} role="button" className={"input input-bordered mt-1 w-full flex items-center " + props.className}>{hint}</div>
-        <ul tabIndex={id} className="dropdown-content z-[1] menu shadow bg-base-100 w-full rounded-lg rounded-t-none">
+        <div tabIndex={id} role="button" 
+        className={"input input-bordered mt-1 w-full flex items-center overflow-hidden text-wrap" + props.className}>
+            <span className="text-ellipsis overflow-hidden">{hint}</span>
+        </div>
+        <ul tabIndex={id} className="dropdown-content z-[5] menu shadow bg-base-100 w-full rounded-lg rounded-t-none">
             {options}
         </ul>
     </div>

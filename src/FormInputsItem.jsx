@@ -18,7 +18,7 @@ function FormInputsItem(props){
         width = `w-full`;
     }
     
-    let inputClass = "";
+    let inputClass = " w-full text-left";
 
     let label = false;
     if(props.label){
@@ -40,7 +40,7 @@ function FormInputsItem(props){
     }
 
     return (
-    <div className={width + " flex flex-col justify-center content-center px-4"}>
+    <div className={width + " form-group"}>
         {label && label}
         <InputAdaptable onChange={handleInputChange} 
         value={props.value} className={inputClass} id={id} {...props} remove_value="0" type={props.type.type}/>
