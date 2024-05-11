@@ -34,6 +34,11 @@ function FormEditorField(props){
 
     let changeWidth = changeCurrentElement('width');
 
+    let changeRequired = function(newValue){
+        newValue = JSON.parse(newValue);
+        changeCurrentElement('required')(newValue);
+    };
+
     let changeType = function(newTypeId){
         let newType = props.formTypeOptions.filter((x) => x.id == newTypeId)[0];
 
@@ -114,14 +119,21 @@ function FormEditorField(props){
                 {element.weight}
             </div>
         </div>
-        <div className="flex flex-col w-6/12 border-1 border-base-300">
+        <div className="flex flex-col w-4/12 border-1 border-base-300">
             <label className="">Field name</label>
             <InputAdaptable className="bg-base-200 " type="text" placeholder="Field name" onChange={changeName} value={element.label}/>
         </div>
         <div className="w-4/12">
             <label className="">Field type</label>
-            <InputAdaptable className="w-full bg-base-200 " type="select" options={formTypeOptions} option_value_field="id" option_text_field="text" 
+            <InputAdaptable className="w-full bg-base-200 " type="select" 
+            options={formTypeOptions} option_value_field="id" option_text_field="text" 
             onChange={changeType} value={element.type.id}/>
+        </div>
+        <div className="w-2/12">
+            <label className="">Required</label>
+            <InputAdaptable className="w-full bg-base-200 " type="select" 
+            options={[{text : 'True', value : true}, {text : 'False', value : false}]} option_value_field="value" option_text_field="text" 
+            onChange={changeRequired} value={element.required}/>
         </div>
         <div className="w-2/12">
             <label  className="">Width</label>
