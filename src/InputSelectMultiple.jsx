@@ -60,7 +60,7 @@ function InputSelectMultiple(props){
     <div className={"dropdown w-full"}>
         <label tabIndex={id} htmlFor={id} role="button" className="w-full">{props.label}</label>
         <div tabIndex={id} role="button" 
-        className={"input input-bordered mt-1 w-full flex items-center overflow-hidden" + props.className}>
+        className={"input input-bordered w-full flex items-center overflow-hidden" + props.className}>
             <span className="text-ellipsis overflow-hidden">{hint}</span>
         </div>
         <ul tabIndex={id} className="dropdown-content z-[5] menu shadow bg-base-100 w-full rounded-lg rounded-t-none">
