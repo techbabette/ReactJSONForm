@@ -39,6 +39,10 @@ function InputSelectMultiple(props){
         let option_value = option_value_field === "__" ? option : option[option_value_field];
         let option_text = option_text_field === "__" ? option : option[option_text_field];
 
+        if(!option_text){
+            return;
+        }
+
         return (
         <li className="w-full" key={index}>
             <label className="label cursor-pointer w-full">

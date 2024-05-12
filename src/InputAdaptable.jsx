@@ -36,6 +36,9 @@ function InputAdaptable(props){
         let options = props.options?.map((option, index) => {
             let option_value = option_value_field === "__" ? option : option[option_value_field];
             let option_text = option_text_field === "__" ? option : option[option_text_field];
+            if(!option_text){
+                return;
+            }
             return <option key={index} value={option_value}>{option_text}</option>;
         })
 
