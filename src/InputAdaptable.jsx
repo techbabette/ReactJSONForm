@@ -41,7 +41,7 @@ function InputAdaptable(props){
 
         inputField = 
         <select name={id} id={id}>
-            {hintOption}
+            {(!props.no_hint) && hintOption}
             {options}
         </select>
     }

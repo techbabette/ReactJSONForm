@@ -10,7 +10,7 @@ function FormEditorField(props){
     let id = props.id;
 
     const elementTypesWithRegex = ['text'];
-    const elementTypesWithOptions = ['select', 'select_multiple'];
+    const elementTypesWithOptions = ['select', 'select_multiple', 'select_without_hint'];
 
     useEffect(() => {
         if(elementTypesWithOptions.includes(element.type.type) && !element.options){

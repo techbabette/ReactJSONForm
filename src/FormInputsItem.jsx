@@ -29,6 +29,14 @@ function FormInputsItem(props){
         label = false;
     }
 
+    let type = props.type.type;
+    let no_hint = false;
+
+    if(type === "select_without_hint"){
+        type = "select"
+        no_hint = true;
+    }
+
     let error = <span className="alert alert-warning mb-2 rounded-t-none">{props.error}</span>
 
     if(props.error){
@@ -43,7 +51,8 @@ function FormInputsItem(props){
     <div className={width + " form-group"}>
         {label && label}
         <InputAdaptable onChange={handleInputChange} 
-        value={props.value} className={inputClass} id={id} {...props} remove_value="0" type={props.type.type}/>
+        value={props.value} className={inputClass} id={id} {...props} remove_value="0" 
+        type={type} no_hint={no_hint}/>
         {props.error && error}
     </div>
     );
