@@ -56,6 +56,20 @@ function InputAdaptable(props){
 
     function bubbleValue(event){
         let value;
+
+
+        if(props.type === "number" && props.limitInput){
+            if(props.minimum && event.target.value < props.minimum){
+                props.onChange(props.minimum);
+                return;
+            }
+
+            if(props.maximum && event.target.value > props.maximum){
+                props.onChange(props.maximum);
+                return;
+            }
+        }
+
         if(props.type !== "select_multiple"){
             value = event.target.value;
             props.onChange(value);
