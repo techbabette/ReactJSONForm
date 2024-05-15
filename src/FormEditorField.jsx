@@ -137,7 +137,7 @@ function FormEditorField(props){
         </div>
         <div className="w-6/12 md:w-2/12">
             <label  className="">Width</label>
-            <InputAdaptable className="w-full bg-base-200 " type="number" onChange={changeWidth} value={element.width}/>
+            <InputAdaptable className="w-full bg-base-200 " type="number" onChange={changeWidth} value={element.width} minimum={1} maximum={12}/>
         </div>
         {elementTypesWithRegex.includes(element.type.type) && 
         <div className="w-full">

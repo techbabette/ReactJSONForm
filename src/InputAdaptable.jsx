@@ -23,7 +23,8 @@ function InputAdaptable(props){
 
     if(props.type === "number"){
         className += " input input-bordered"
-        inputField = <input type="number" name={id} id={id} placeholder={props.placeholder ?? ""}/>
+        inputField = <input type="number" name={id} id={id} placeholder={props.placeholder ?? ""} 
+                      min={props.mimimum} max={props.maximum}/>
     }
 
     if(props.type === "select"){
