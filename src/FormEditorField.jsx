@@ -11,6 +11,7 @@ function FormEditorField(props){
 
     const elementTypesWithRegex = ['text'];
     const elementTypesWithOptions = ['select', 'select_multiple', 'select_without_hint'];
+    const elementTypesWithMinimumMaximum = ['number'];
 
     useEffect(() => {
         if(elementTypesWithOptions.includes(element.type.type) && !element.options){
@@ -87,6 +88,9 @@ function FormEditorField(props){
         }
     }
 
+    let changeMinimum = changeCurrentElement("minimum");
+    let changeMaximum = changeCurrentElement('maximum');
+
     let deleteOption = function(index){
         let newOptions = [...element.options];
         if(newOptions.length < 2){
@@ -139,9 +143,21 @@ function FormEditorField(props){
             <label  className="">Width</label>
             <InputAdaptable className="w-full bg-base-200 " type="number" onChange={changeWidth} value={element.width} minimum={1} maximum={12}/>
         </div>
+        {elementTypesWithMinimumMaximum.includes(element.type.type) &&
+        <>
+        <div className="w-full">
+            <label  className="">Minimum (Optional)</label>
+            <InputAdaptable className="w-full bg-base-200 " type="number" onChange={changeMinimum} value={element.minimum || ""}/>
+        </div>
+        <div className="w-full">
+            <label  className="">Maximum (Optional)</label>
+            <InputAdaptable className="w-full bg-base-200 " type="number" onChange={changeMaximum} value={element.maximum || ""}/>
+        </div>
+        </>
+        }
         {elementTypesWithRegex.includes(element.type.type) && 
         <div className="w-full">
-            <label  className="">Regex (optional)</label>
+            <label  className="">Regex (Optional)</label>
             <InputAdaptable className="w-full bg-base-200 " type="text" placeholder="/^[a-z]$/"/>
         </div>}
         {elementTypesWithOptions.includes(element.type.type) &&
