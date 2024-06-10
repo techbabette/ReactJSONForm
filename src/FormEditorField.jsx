@@ -12,6 +12,7 @@ function FormEditorField(props){
     const elementTypesWithRegex = ['text'];
     const elementTypesWithOptions = ['select', 'select_multiple', 'select_without_hint'];
     const elementTypesWithMinimumMaximum = ['number'];
+    const elementTypesWithDefaultOption = ['select_without_hint'];
 
     useEffect(() => {
         if(elementTypesWithOptions.includes(element.type.type) && !element.options){
@@ -105,8 +106,20 @@ function FormEditorField(props){
         let onChange = changeOption(index)
         return (
             <div key={index} className="w-full my-1">
-                <InputAdaptable type="text" placeholder="New option" onChange={onChange} value={option} className="w-10/12"/>
-                <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-error border-0 rounded-sm">delete</button>
+                {!elementTypesWithDefaultOption.includes(element.type.type) && 
+                <>
+                                <InputAdaptable type="text" placeholder="New option" onChange={onChange} value={option} className="w-10/12"/>
+                                <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-error border-0 rounded-sm">delete</button>
+                </>
+                }
+                {elementTypesWithDefaultOption.includes(element.type.type) && 
+                <>
+                                <InputAdaptable type="text" placeholder="New option" onChange={onChange} value={option} className="w-8/12"/>
+                                <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-info border-0 rounded-sm">Make default</button>
+                                <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-error border-0 rounded-sm">delete</button>
+                </>
+                }
+
             </div>
         )
     });
