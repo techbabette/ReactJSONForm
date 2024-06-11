@@ -5,7 +5,7 @@ function FormInputsItem(props){
 
     useEffect(() => {
         props.remove_value();
-    }, [props.options])
+    }, [props.options, props.defaultOption])
 
     useEffect(() => {
         props.remove_value();

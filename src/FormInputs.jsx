@@ -27,6 +27,13 @@ function FormInputs(props){
             defaultValue = 0;
         }
 
+        if(currentInput.type.type === "select_without_hint"){
+            let defaultOption = currentInput.defaultOption;
+            let useDefaultOption = !!defaultOption;
+
+            defaultValue = useDefaultOption ? defaultOption : 0
+        }
+
         if(currentInput.type.type === "select_multiple"){
             defaultValue = [];
         }

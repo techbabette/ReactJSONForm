@@ -6,6 +6,9 @@ function InputAdaptable(props){
     let inputField = <input type="text" name={id} id={id} placeholder={props.placeholder ?? ""}/>;
 
     let className = props.className;
+
+    let value = props.value;
+
     if(props.type === "text"){
         className += " input input-bordered"
         inputField = <input type="text" name={id} id={id} placeholder={props.placeholder ?? ""}/>
@@ -80,7 +83,7 @@ function InputAdaptable(props){
         props.onChange(value);
     }
 
-    inputField = React.cloneElement(inputField, { ...props, onChange: bubbleValue, value : props.value, className : className });
+    inputField = React.cloneElement(inputField, { ...props, onChange: bubbleValue, value, className : className });
 
     return (
     <>

@@ -108,7 +108,7 @@ function FormEditorField(props){
 
     let options = element.options?.map((option, index) => {
         let onChange = changeOption(index);
-        let currentOptionIsDefault = element.defaultOption == index;
+        let currentOptionIsDefault = element.defaultOption == option;
         let style = currentOptionIsDefault ? "border-2 border-base-100" : "";
         return (
             <div key={index} className="w-full my-1">
@@ -121,7 +121,7 @@ function FormEditorField(props){
                 {elementTypesWithDefaultOption.includes(element.type.type) && 
                 <>
                                 <InputAdaptable type="text" placeholder="New option" onChange={onChange} value={option} className="w-8/12"/>
-                                <button onClick={() => makeOptionDefault(index)} 
+                                <button onClick={() => makeOptionDefault(option)} 
                                 className={"w-2/12 btn border-0 rounded-sm btn-primary " + style}>
                                 {currentOptionIsDefault && "Default"}
                                 {!currentOptionIsDefault && "Make default"}
