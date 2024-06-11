@@ -18,6 +18,9 @@ function FormEditorField(props){
         if(elementTypesWithOptions.includes(element.type.type) && !element.options){
             changeCurrentElement('options')([""]);
         }
+        if(elementTypesWithDefaultOption.includes(element.type.type) && !element.defaultOption){
+            changeCurrentElement('defaultOption')(0);
+        }
     }, [element.type.type])
 
     let changeCurrentElement = function(attribute){
@@ -97,8 +100,20 @@ function FormEditorField(props){
         if(newOptions.length < 2){
             return;
         }
-
         newOptions.splice(index, 1);
+
+        if(index == element.defaultOption){
+            let currentShape = {...element};
+            currentShape["defaultOption"] = 0;
+            currentShape["options"] = newOptions;
+
+            let currentForm = {...form};
+            currentForm.formElements[id] = currentShape;
+    
+            setForm(currentForm);
+            return;
+        }
+
         changeCurrentElement('options')(newOptions);
     }
 
@@ -108,7 +123,7 @@ function FormEditorField(props){
 
     let options = element.options?.map((option, index) => {
         let onChange = changeOption(index);
-        let currentOptionIsDefault = element.defaultOption == option;
+        let currentOptionIsDefault = element.defaultOption == index;
         let style = currentOptionIsDefault ? "border-2 border-base-100" : "";
         return (
             <div key={index} className="w-full my-1">
@@ -121,7 +136,7 @@ function FormEditorField(props){
                 {elementTypesWithDefaultOption.includes(element.type.type) && 
                 <>
                                 <InputAdaptable type="text" placeholder="New option" onChange={onChange} value={option} className="w-8/12"/>
-                                <button onClick={() => makeOptionDefault(option)} 
+                                <button onClick={() => makeOptionDefault(index)} 
                                 className={"w-2/12 btn border-0 rounded-sm btn-primary " + style}>
                                 {currentOptionIsDefault && "Default"}
                                 {!currentOptionIsDefault && "Make default"}

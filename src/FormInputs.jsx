@@ -31,7 +31,7 @@ function FormInputs(props){
             let defaultOption = currentInput.defaultOption;
             let useDefaultOption = !!defaultOption;
 
-            defaultValue = useDefaultOption ? defaultOption : 0
+            defaultValue = useDefaultOption ? currentInput.options[defaultOption] : 0
         }
 
         if(currentInput.type.type === "select_multiple"){
