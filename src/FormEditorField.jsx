@@ -102,21 +102,31 @@ function FormEditorField(props){
         changeCurrentElement('options')(newOptions);
     }
 
+    let makeOptionDefault = function(index){
+        changeCurrentElement('defaultOption')(index);
+    }
+
     let options = element.options?.map((option, index) => {
-        let onChange = changeOption(index)
+        let onChange = changeOption(index);
+        let currentOptionIsDefault = element.defaultOption == index;
+        let style = currentOptionIsDefault ? "border-2 border-base-100" : "";
         return (
             <div key={index} className="w-full my-1">
                 {!elementTypesWithDefaultOption.includes(element.type.type) && 
                 <>
                                 <InputAdaptable type="text" placeholder="New option" onChange={onChange} value={option} className="w-10/12"/>
-                                <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-error border-0 rounded-sm">delete</button>
+                                <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-error border-0 rounded-sm">Delete</button>
                 </>
                 }
                 {elementTypesWithDefaultOption.includes(element.type.type) && 
                 <>
                                 <InputAdaptable type="text" placeholder="New option" onChange={onChange} value={option} className="w-8/12"/>
-                                <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-info border-0 rounded-sm">Make default</button>
-                                <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-error border-0 rounded-sm">delete</button>
+                                <button onClick={() => makeOptionDefault(index)} 
+                                className={"w-2/12 btn border-0 rounded-sm btn-primary " + style}>
+                                {currentOptionIsDefault && "Default"}
+                                {!currentOptionIsDefault && "Make default"}
+                                </button>
+                                <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-error border-0 rounded-sm">Delete</button>
                 </>
                 }
 
