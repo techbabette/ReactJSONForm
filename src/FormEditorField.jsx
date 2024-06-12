@@ -114,6 +114,18 @@ function FormEditorField(props){
             return;
         }
 
+        if(index < element.defaultOption){
+            let currentShape = {...element};
+            currentShape["defaultOption"] = currentShape["defaultOption"] - 1;
+            currentShape["options"] = newOptions;
+
+            let currentForm = {...form};
+            currentForm.formElements[id] = currentShape;
+    
+            setForm(currentForm);
+            return;
+        }
+
         changeCurrentElement('options')(newOptions);
     }
 
