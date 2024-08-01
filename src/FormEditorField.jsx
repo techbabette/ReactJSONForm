@@ -1,5 +1,5 @@
 import InputAdaptable from "./InputAdaptable";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import findNextFieldByWeight from "./lib/findFieldWithNextLowestWeight";
 function FormEditorField(props){
@@ -8,6 +8,9 @@ function FormEditorField(props){
     let element = props.element;
     let formTypeOptions = props.formTypeOptions ?? [];
     let id = props.id;
+
+    let regexOptions = props.regexOptions;
+    let [regexOption, setRegexOption] = new useState(null);
 
     const elementTypesWithRegex = ['text'];
     const elementTypesWithOptions = ['select', 'select_multiple', 'select_without_hint'];
@@ -90,6 +93,17 @@ function FormEditorField(props){
 
             changeCurrentElement('options')(newOptions);
         }
+    }
+
+    let changeRegex = function(newRegex){
+        changeCurrentElement("regex")(newRegex);
+        for(let option of regexOptions){
+            if (option.value == newRegex){
+                setRegexOption(option.value);
+                return;
+            }
+        }
+        setRegexOption("!!$$");
     }
 
     let changeMinimum = changeCurrentElement("minimum");
@@ -207,10 +221,19 @@ function FormEditorField(props){
         </>
         }
         {elementTypesWithRegex.includes(element.type.type) && 
+        <>
+        <div className="w-full">
+            <label  className="">Regex preset</label>
+            <InputAdaptable className="w-full bg-base-200 " type="select" placeholder="/^[a-z]$/"
+            options={regexOptions} onChange={changeRegex}
+            option_value_field="value" option_text_field="text" value={regexOption} no_hint={true}/>
+        </div>
         <div className="w-full">
             <label  className="">Regex (Optional)</label>
-            <InputAdaptable className="w-full bg-base-200 " type="text" placeholder="/^[a-z]$/"/>
-        </div>}
+            <InputAdaptable className="w-full bg-base-200 " type="text" placeholder="/^[a-z]$/"
+            onChange={changeRegex} value={element.regex}/>
+        </div>
+        </>}
         {elementTypesWithOptions.includes(element.type.type) &&
         <div className="w-full">
             {options}

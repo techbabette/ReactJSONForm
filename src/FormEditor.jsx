@@ -5,6 +5,7 @@ import FormComplete from "./FormComplete";
 export default function FormEditor(props){
     let defaultFieldType = props.defaultFieldType;
     let formTypeOptions = props.formTypeOptions;
+    let regexOptions = [{"text": "None", "value": ""},...props.regexOptions, {"text" : "Custom", "value" : "!!$$", "disabled" : true}];
 
     let form = props.form;
     let setForm = props.setForm;
@@ -18,7 +19,7 @@ export default function FormEditor(props){
         return (
             <FormEditorField key={fieldId} id={fieldId} element={formElement}
             form={form} setForm={setForm}
-            formTypeOptions={formTypeOptions}/>
+            formTypeOptions={formTypeOptions} regexOptions={regexOptions}/>
         )
     }) 
 

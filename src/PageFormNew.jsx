@@ -4,9 +4,10 @@ import FormEditor from "./FormEditor";
 import axios from "./axios/axios";
 
 function PageFormNew(){
-    let [defaultFieldType, setDefaultFieldType] = new useState({})
+    let [defaultFieldType, setDefaultFieldType] = new useState(null)
+    let [regexOptions, setRegexOptions] = new useState(null)
     let [form, setForm] = new useState(null);
-    let [formTypeOptions, setFormTypeOptions] = new useState([]);
+    let [formTypeOptions, setFormTypeOptions] = new useState(null);
 
     let setFormAndSave = function(newFormState){
         setForm(newFormState);
@@ -21,12 +22,21 @@ function PageFormNew(){
                 setDefaultFieldType(result.data.body[0]);
             }
         }
+        async function loadRegexOptions() {
+            let result = await axios.get("/regex_options");
+            if(result.success){
+                setRegexOptions(result.data.body);
+            }
+        }
         loadFormTypes();
+        loadRegexOptions();
     }, [])
 
     useEffect(() => {
-        loadInitialForm();
-    }, [defaultFieldType])
+        if(defaultFieldType && regexOptions){
+            loadInitialForm();
+        }
+    }, [defaultFieldType, regexOptions])
 
     let loadInitialForm = async function(){
         if(localStorage.getItem('newFormState')) {
@@ -64,7 +74,7 @@ function PageFormNew(){
         <>
         <NavBar/>
         <FormEditor form={form} setForm={setFormAndSave}
-        defaultFieldType={defaultFieldType}
+        defaultFieldType={defaultFieldType} regexOptions={regexOptions}
         formTypeOptions={formTypeOptions}/>
         </>
         }
