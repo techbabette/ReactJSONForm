@@ -19,6 +19,18 @@ function checkFormField(field, value){
         }
     }
 
+    if(field.minimum){
+        if(value && parseInt(value) < field.minimum){
+            return `This field cannot be below ${field.minimum}`
+        }
+    }
+
+    if(field.maximum){
+        if(value && parseInt(value) > field.maximum){
+            return `This field cannot be above ${field.maximum}`
+        }
+    }
+
     return null;
 }
 
