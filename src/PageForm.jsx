@@ -85,7 +85,7 @@ function PageForm() {
 
   useEffect(() => {
     async function loadForm() {
-      let result = await axios.get(`/form/${id}`);
+      let result = await axios.get(`/forms/${id}`);
       console.log(result);
       if(result.success){
         setForm(getFormFromResponse(result.data.body));

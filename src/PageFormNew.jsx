@@ -16,7 +16,7 @@ function PageFormNew(){
 
     useEffect(() => {
         async function loadFormTypes() {
-            let result = await axios.get('/input');
+            let result = await axios.get('/inputs');
             if(result.success){
                 setFormTypeOptions(result.data.body);
                 setDefaultFieldType(result.data.body[0]);
