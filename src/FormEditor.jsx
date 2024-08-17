@@ -61,13 +61,30 @@ export default function FormEditor(props){
         setForm(newForm);
     }
 
+    let changeFormResetButtonAvailability = function(newValue){
+        let newForm = {...form};
+        newForm.resetButtonAvailable = newValue;
+        setForm(newForm);
+    }
+
     let newFieldButton = (<button className="w-full btn btn-success p-4" onClick={addNewField}>New field</button>)
 
     return (
         <>
-        <div>
-        <label htmlFor="formNameInput" className="text-2xl p-2">Form name</label>
-            <InputAdaptable id="formNameInput" className="w-2/6 block" type="text" onChange={changeName} value={form.formName}/>
+        <div className="flex flex-col md:flex-row w-full">
+            <div className="w-full md:w-6/12">
+                <label htmlFor="formNameInput" className="text-2xl p-2">Form name</label>
+                    <InputAdaptable id="formNameInput" className="w-full block" type="text" onChange={changeName} value={form.formName}/>
+            </div>
+            <div className="w-full md:w-6/12">
+                <label htmlFor="formResetButton" className="text-2xl p-2">Form reset button</label>
+                    <InputAdaptable id="formResetButton" className="w-full block" type="select" 
+                    onChange={changeFormResetButtonAvailability} value={form.resetButtonAvailable}
+                    options={[{text : 'Available', value : true}, {text : 'Unavailable', value : false}]}
+                    option_value_field={'value'} option_text_field={'text'}
+                    no_hint={true}
+                    />
+            </div>
         </div>
         <hr/>
         <div className="flex flex-col md:flex-row">

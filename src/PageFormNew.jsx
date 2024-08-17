@@ -48,7 +48,8 @@ function PageFormNew(){
             formId : 1,
             formName : "New form",
             formDirection : "row",
-            formElements : {}
+            formElements : {},
+            resetButtonAvailable : true
         }
 
         newFormObject.formElements[1] = {
