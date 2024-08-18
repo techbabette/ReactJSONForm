@@ -63,8 +63,9 @@ let response = {
 
 function getFormFromResponse(responseForm){
     let form = {};
-    form.formName = responseForm.name;
 
+    form.resetButtonAvailable = responseForm.resetButtonAvailable ? "true" : "false";
+    form.formName = responseForm.name;
     let formElementsObject = {};
 
     for(let formElement of responseForm.form_inputs){
