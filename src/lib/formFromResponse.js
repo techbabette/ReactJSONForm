@@ -73,6 +73,7 @@ function getFormFromResponse(responseForm){
         let options = newElement.simple_options.map((x) => x.value);
         newElement.type = newElement.input;
         newElement.options = options;
+        newElement.defaultOption = formElement.simple_options.findIndex(x => x.default_selected) ?? 0;
         formElementsObject[formElement.id] = newElement;
     }
 
