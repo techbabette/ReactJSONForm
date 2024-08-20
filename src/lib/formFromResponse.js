@@ -68,13 +68,13 @@ function getFormFromResponse(responseForm){
     form.name = responseForm.name;
     let elementsObject = {};
 
-    for(let formElement of responseForm.form_inputs){
-        let newElement = {...formElement};        
-        let options = newElement.simple_options.map((x) => x.value);
-        newElement.type = newElement.input;
+    for(let element of responseForm.form_inputs){
+        let newElement = {...element};        
+        let options = element.simple_options.map((x) => x.value);
+        newElement.type = element.input;
         newElement.options = options;
-        newElement.defaultOption = formElement.simple_options.findIndex(x => x.default_selected) ?? 0;
-        elementsObject[formElement.id] = newElement;
+        newElement.defaultOption = element.simple_options.findIndex(x => x.default_selected);
+        elementsObject[element.id] = newElement;
     }
 
     form.elements = elementsObject;
