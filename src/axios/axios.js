@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({baseURL : "http://localhost/api/"});
+const axiosInstance = axios.create({baseURL : window.__ENV__.API_URL});
 
 axiosInstance.interceptors.response.use(
     function (response){
