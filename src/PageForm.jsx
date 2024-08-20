@@ -7,10 +7,10 @@ import { useParams } from 'react-router-dom';
 import getFormFromResponse from './lib/formFromResponse';
 
 let formJSON = {
-  formId : 1,
-  formName : "New form",
-  formDirection : "row",
-  formElements : {
+  id : 1,
+  name : "New form",
+  direction : "row",
+  elements : {
       2 : {
           type : {
             id: 1,

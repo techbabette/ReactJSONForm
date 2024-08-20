@@ -32,7 +32,7 @@ function FormEditorField(props){
             currentShape[attribute] = newValue;
     
             let currentForm = {...form};
-            currentForm.formElements[id] = currentShape;
+            currentForm.elements[id] = currentShape;
     
             setForm(currentForm);
         }
@@ -55,7 +55,7 @@ function FormEditorField(props){
 
     let deleteField = function(){
         let currentForm = {...form};
-        delete currentForm.formElements[id];
+        delete currentForm.elements[id];
 
         setForm(currentForm);
     }
@@ -66,7 +66,7 @@ function FormEditorField(props){
         if(!fieldToSwapWithIndex) return;
 
         let thisFieldShape = {...element};
-        let fieldToSwapWithShape = {...form.formElements[fieldToSwapWithIndex]}
+        let fieldToSwapWithShape = {...form.elements[fieldToSwapWithIndex]}
 
         thisFieldShape['weight'] += fieldToSwapWithShape['weight']; 
         fieldToSwapWithShape['weight'] = thisFieldShape['weight'] - fieldToSwapWithShape['weight'];
@@ -74,8 +74,8 @@ function FormEditorField(props){
         
         let currentForm = {...form};
 
-        currentForm.formElements[id] = thisFieldShape;
-        currentForm.formElements[fieldToSwapWithIndex] = fieldToSwapWithShape;
+        currentForm.elements[id] = thisFieldShape;
+        currentForm.elements[fieldToSwapWithIndex] = fieldToSwapWithShape;
 
         setForm(currentForm);
     }
@@ -122,7 +122,7 @@ function FormEditorField(props){
             currentShape["options"] = newOptions;
 
             let currentForm = {...form};
-            currentForm.formElements[id] = currentShape;
+            currentForm.elements[id] = currentShape;
     
             setForm(currentForm);
             return;
@@ -134,7 +134,7 @@ function FormEditorField(props){
             currentShape["options"] = newOptions;
 
             let currentForm = {...form};
-            currentForm.formElements[id] = currentShape;
+            currentForm.elements[id] = currentShape;
     
             setForm(currentForm);
             return;

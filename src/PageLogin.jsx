@@ -1,8 +1,8 @@
 import FormComplete from "./FormComplete";
 import { toast } from 'react-toastify';
 let loginForm = {
-    formName : "Login to your Formify account",
-    formElements : {
+    name : "Login to your Formify account",
+    elements : {
         email : {
             type : {type : 'text'},
             label : "Email",

@@ -65,8 +65,8 @@ function getFormFromResponse(responseForm){
     let form = {};
 
     form.resetButtonAvailable = responseForm.resetButtonAvailable ? "true" : "false";
-    form.formName = responseForm.name;
-    let formElementsObject = {};
+    form.name = responseForm.name;
+    let elementsObject = {};
 
     for(let formElement of responseForm.form_inputs){
         let newElement = {...formElement};        
@@ -74,10 +74,10 @@ function getFormFromResponse(responseForm){
         newElement.type = newElement.input;
         newElement.options = options;
         newElement.defaultOption = formElement.simple_options.findIndex(x => x.default_selected) ?? 0;
-        formElementsObject[formElement.id] = newElement;
+        elementsObject[formElement.id] = newElement;
     }
 
-    form.formElements = formElementsObject;
+    form.elements = elementsObject;
 
     return form;
 }

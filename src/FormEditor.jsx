@@ -10,12 +10,12 @@ export default function FormEditor(props){
     let form = props.form;
     let setForm = props.setForm;
 
-    let formFieldsIDs = Object.keys(form.formElements).sort(function(a, b){
-        return form.formElements[b].weight - form.formElements[a].weight;
+    let formFieldsIDs = Object.keys(form.elements).sort(function(a, b){
+        return form.elements[b].weight - form.elements[a].weight;
     });
 
     let formFields = formFieldsIDs.map((fieldId) => {
-        let formElement = form.formElements[fieldId];
+        let formElement = form.elements[fieldId];
         return (
             <FormEditorField key={fieldId} id={fieldId} element={formElement}
             form={form} setForm={setForm}
@@ -26,21 +26,21 @@ export default function FormEditor(props){
     let addNewField = function(){
         let formCopy = {...form};
         let newFieldId = 1;
-        let fieldIdsAsNumbers = Object.keys(formCopy.formElements).map((key) => parseInt(key));
+        let fieldIdsAsNumbers = Object.keys(formCopy.elements).map((key) => parseInt(key));
         if(fieldIdsAsNumbers.length > 0){
             let maxFieldId = Math.max(...fieldIdsAsNumbers);
             newFieldId = maxFieldId + 1;
         }
 
         let minimumWeight = 50000;
-        for(let index of Object.keys(formCopy.formElements)){
-            let element = formCopy.formElements[index];
+        for(let index of Object.keys(formCopy.elements)){
+            let element = formCopy.elements[index];
             if(element.weight <= minimumWeight){
                 minimumWeight = element.weight - 5;
             }
         }
 
-        formCopy.formElements[newFieldId] = {
+        formCopy.elements[newFieldId] = {
             type : defaultFieldType,
             label : "New field",
             required : true,
@@ -57,7 +57,7 @@ export default function FormEditor(props){
 
     let changeName = function(newValue){
         let newForm = {...form};
-        newForm.formName = newValue;
+        newForm.name = newValue;
         setForm(newForm);
     }
 
@@ -73,8 +73,8 @@ export default function FormEditor(props){
         <>
         <div className="flex flex-col md:flex-row w-full">
             <div className="w-full md:w-6/12">
-                <label htmlFor="formNameInput" className="text-2xl p-2">Form name</label>
-                    <InputAdaptable id="formNameInput" className="w-full block" type="text" onChange={changeName} value={form.formName}/>
+                <label htmlFor="nameInput" className="text-2xl p-2">Form name</label>
+                    <InputAdaptable id="nameInput" className="w-full block" type="text" onChange={changeName} value={form.name}/>
             </div>
             <div className="w-full md:w-6/12">
                 <label htmlFor="formResetButton" className="text-2xl p-2">Form reset button</label>

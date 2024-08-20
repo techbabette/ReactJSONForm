@@ -45,14 +45,14 @@ function PageFormNew(){
         };
 
         let newFormObject = {
-            formId : 1,
-            formName : "New form",
-            formDirection : "row",
-            formElements : {},
+            id : 1,
+            name : "New form",
+            direction : "row",
+            elements : {},
             resetButtonAvailable : true
         }
 
-        newFormObject.formElements[1] = {
+        newFormObject.elements[1] = {
             type : defaultFieldType,
             label : "First field",
             required : true,

@@ -3,8 +3,8 @@ import { toast } from 'react-toastify';
 import axios from "./axios/axios";
 import { useState, useRef } from "react";
 let registerForm = {
-    formName : "Create an account to save your forms",
-    formElements : {
+    name : "Create an account to save your forms",
+    elements : {
         first_name : {
             type : {type : 'text'},
             label : "First name",

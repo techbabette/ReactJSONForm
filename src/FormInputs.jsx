@@ -4,8 +4,8 @@ function FormInputs(props){
     let formJSON = props.form;
     let errors = props.errors;
 
-    let inputKeys = Object.keys(formJSON.formElements);
-    let sortedInputKeys = inputKeys.sort((a,b) => formJSON.formElements[b].weight - formJSON.formElements[a].weight);
+    let inputKeys = Object.keys(formJSON.elements);
+    let sortedInputKeys = inputKeys.sort((a,b) => formJSON.elements[b].weight - formJSON.elements[a].weight);
     
     function handleInputChange(newValue, key){
         let newFormValue = {...props.value};
@@ -20,7 +20,7 @@ function FormInputs(props){
     }
 
     let inputs = sortedInputKeys.map((key) => {
-        let currentInput = formJSON.formElements[key];
+        let currentInput = formJSON.elements[key];
         let defaultValue = "";
 
         if(currentInput.type.type === "select"){
@@ -43,7 +43,7 @@ function FormInputs(props){
         }
         
         return <FormInputsItem key={key} id={key} error={errors[key]} 
-        value={props.value[key] ?? defaultValue} onChange={handler} remove_value={() => removeValueOfElement(key)} {...formJSON.formElements[key]}/>
+        value={props.value[key] ?? defaultValue} onChange={handler} remove_value={() => removeValueOfElement(key)} {...formJSON.elements[key]}/>
     }
     )
 

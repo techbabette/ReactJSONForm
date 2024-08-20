@@ -16,7 +16,7 @@ function FormComplete(props){
     }, [props.errors]);
 
     function handleSubmit(){
-        let errors = checkFormFieldsAll(form.formElements, formValue);
+        let errors = checkFormFieldsAll(form.elements, formValue);
         setFormErrors(errors);
 
         if(Object.keys(errors).length > 0){
@@ -49,7 +49,7 @@ function FormComplete(props){
             setFormValue(newValue);
             return;
         }
-        let error = checkFormField(form.formElements[keyChanged], newValue[keyChanged]);
+        let error = checkFormField(form.elements[keyChanged], newValue[keyChanged]);
         if(!error){
             removeError(keyChanged);
         }else{
@@ -60,7 +60,7 @@ function FormComplete(props){
 
     return (
     <div className={'w-full ' + props.className}>
-        <h1 className="p-2 text-2xl">{form.formName ? form.formName : "Form name goes here"}</h1>
+        <h1 className="p-2 text-2xl">{form.name ? form.name : "Form name goes here"}</h1>
         <FormInputs form={form} errors={formErrors} value={formValue} onChange={handleChange}/>
         {form.resetButtonAvailable === "true" && 
         <button type="button" className="btn btn-accent w-full px-2 my-2" onClick={handleReset}>Reset form</button>

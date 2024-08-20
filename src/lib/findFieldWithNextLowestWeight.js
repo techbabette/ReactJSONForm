@@ -1,8 +1,8 @@
 let formJSON = {
-    formId : 1,
-    formName : "New form",
-    formDirection : "row",
-    formElements : {
+    id : 1,
+    name : "New form",
+    direction : "row",
+    elements : {
         2 : {
             type : {
               id: 1,
@@ -66,11 +66,11 @@ let formJSON = {
   
 
 function getSortedElementIndexes(form){
-    let formElements = form.formElements;
-    let elementIndexes = Object.keys(form.formElements);
+    let elements = form.elements;
+    let elementIndexes = Object.keys(form.elements);
 
     elementIndexes.sort(function(a, b){
-        return formElements[b].weight - formElements[a].weight;
+        return elements[b].weight - elements[a].weight;
     })
 
     return elementIndexes;
