@@ -10,7 +10,7 @@ function FormEditorField(props){
     let id = props.id;
 
     let regexOptions = props.regexOptions;
-    let [regexOption, setRegexOption] = new useState(null);
+    let [regexOptionSelected, setRegexOptionSelected] = new useState(null);
 
     const elementTypesWithRegex = ['text'];
     const elementTypesWithOptions = ['select', 'select_multiple', 'select_without_hint'];
@@ -99,11 +99,11 @@ function FormEditorField(props){
         changeCurrentElement("regex")(newRegex);
         for(let option of regexOptions){
             if (option.value == newRegex){
-                setRegexOption(option.value);
+                setRegexOptionSelected(option.value);
                 return;
             }
         }
-        setRegexOption("!!$$");
+        setRegexOptionSelected("!!$$");
     }
 
     let changeMinimum = changeCurrentElement("minimum");
@@ -226,7 +226,7 @@ function FormEditorField(props){
             <label  className="">Regex preset</label>
             <InputAdaptable className="w-full bg-base-200 " type="select" placeholder="/^[a-z]$/"
             options={regexOptions} onChange={changeRegex}
-            option_value_field="value" option_text_field="text" value={regexOption} no_hint={true}/>
+            option_value_field="value" option_text_field="text" value={regexOptionSelected} no_hint={true}/>
         </div>
         <div className="w-full">
             <label  className="">Regex (Optional)</label>
