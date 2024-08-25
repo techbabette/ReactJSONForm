@@ -17,3 +17,9 @@ export const userSlice = createSlice({
         }
     }
 });
+
+export const { setLinks } = userSlice.actions;
+
+export const getLinks = (state) => state.user.links;
+
+export default userSlice.reducer;

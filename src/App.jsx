@@ -3,24 +3,22 @@ import router from './router/router'
 
 import ToastContainer from './toast/ToastContainer'
 
-import { useState } from 'react';
 import { useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
 import { getTheme } from './redux/slices/theme';
-function load(){
-    return new Promise((Resolve, Reject) => {
-        setTimeout(() => Resolve("done"), 1000);
-    });
-};
+import axios from "./axios/axios";
+import { useDispatch, useSelector } from 'react-redux';
+import { setLinks, getLinks } from './redux/slices/user';
 
 function App(){
-    let [isLoaded, setIsLoaded] = useState(false);
     const theme = useSelector(getTheme);
+    const links = useSelector(getLinks);
+    const dispatch = useDispatch();
+
     useEffect(() => {
         async function initialLoad() {
-            let response = await load();
-            setIsLoaded(true);
+            let result = await axios.get('/links');
+            dispatch(setLinks(result.data));
         }
 
         initialLoad();
@@ -38,13 +36,13 @@ function App(){
 
     return (
         <>
-        {isLoaded && 
+        {links && 
         <>
             <RouterProvider router={router}/>
             <ToastContainer/>
         </>
         }
-        {!isLoaded && loading
+        {!links && loading
         }
         </>
     );
