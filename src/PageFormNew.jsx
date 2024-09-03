@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import FormEditor from "./FormEditor";
 import axios from "./axios/axios";
+import PageFormNewLoading from "./PageFormNewLoading";
 
 function PageFormNew(){
     let [defaultFieldType, setDefaultFieldType] = new useState(null)
@@ -65,11 +66,7 @@ function PageFormNew(){
 
     return (
         <>
-        {!form && 
-        <div className='w-full h-screen mk-text-center'>
-            <p className='my-2 text-8xl text-primary'>Loading editor</p>
-            <span className="loading loading-spinner mx-auto loading-lg"></span>
-        </div>
+        {!form && <PageFormNewLoading/>
         }
         {form && 
         <>
