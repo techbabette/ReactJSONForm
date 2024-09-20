@@ -50,7 +50,7 @@ function PageFormNew(){
             name : "New form",
             direction : "row",
             elements : {},
-            resetButtonAvailable : true
+            resetButtonAvailable : "true"
         }
 
         newFormObject.elements[1] = {
