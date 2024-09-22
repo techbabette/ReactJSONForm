@@ -22,7 +22,12 @@ export const { setLinks, setJWT } = userSlice.actions;
 
 export const getLinks = (state) => state.user.links
 
-export const getLinksForUser = (state) => getLinks(state);
+export const getUserGroup = (state) => state.user.JWT ? getJWTClaimsFromToken(state.user.JWT)["group"] : "Logged out"
+
+export const getLinksForUser = createSelector(
+    [getLinks, getUserGroup],
+    (links, userGroup) => links.filter(link => link.groups.includes(userGroup))
+)
 
 export const getLinksForPosition = createSelector(
     [getLinksForUser, (state, position) => position], 
