@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
     name : "user",
     initialState : {
@@ -18,8 +18,15 @@ export const userSlice = createSlice({
     }
 });
 
-export const { setLinks } = userSlice.actions;
+export const { setLinks, setJWT } = userSlice.actions;
 
-export const getLinks = (state) => state.user.links;
+export const getLinks = (state) => state.user.links
+
+export const getLinksForUser = (state) => getLinks(state);
+
+export const getLinksForPosition = createSelector(
+    [getLinksForUser, (state, position) => position], 
+    (links, position) => links.filter(link => link.position === position).sort((a, b) => b.weight - a.weight)
+)
 
 export default userSlice.reducer;

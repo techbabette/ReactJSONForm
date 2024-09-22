@@ -2,37 +2,12 @@ import { Outlet } from "react-router-dom";
 import NavLink from "./NavLink";
 import NavBar from "./NavBar";
 
+import { getLinksForPosition } from './redux/slices/user';
+import { useSelector } from 'react-redux';
 function LayoutStandard(){
-    let linksForEveryone = [
-        {
-            to : "/",
-            text: "Home"
-        },
-        {
-            to : "/form/new",
-            text: "Create new form"
-        },
-    ]
+    const linksForPosition = useSelector((state) => getLinksForPosition(state, "main_navbar"));
 
-    let authenticationLinks = [
-        {
-            to : "/login",
-            text : "Login"
-        },
-        {
-            to : "/register",
-            text: "Register"
-        }
-    ]
-
-    let linksToRender = linksForEveryone;
-
-    let userLoggedIn = false;
-    if(!userLoggedIn){
-        linksToRender = linksToRender.concat(authenticationLinks);
-    }
-
-    let links = linksToRender.map((link, index) => <NavLink key={index} to={link.to} text={link.text}/>) 
+    let links = linksForPosition.map((link, index) => <NavLink key={index} to={link.to} text={link.text}/>) 
     
     return (
     <>
