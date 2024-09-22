@@ -20,6 +20,7 @@ function NavBarDropdown(props){
         <ul className="w-full font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0">
         <NavBarThemeToggle/>
             {props.links}
+            {props.buttons}
         </ul>
     </div>
     </>

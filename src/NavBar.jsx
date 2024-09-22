@@ -6,7 +6,7 @@ function NavBar(props){
         <div className="flex-1">
             <NavLink to="/" text="Formify" className="text-primary text-2xl"/>
         </div>
-        <NavBarDropdown links={props.links}/>
+        <NavBarDropdown links={props.links} buttons={props.buttons}/>
     </nav>
     );
 };

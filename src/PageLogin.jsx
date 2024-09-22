@@ -1,5 +1,10 @@
+import { useRef } from "react";
 import FormComplete from "./FormComplete";
+import axios from "./axios/axios";
 import { toast } from 'react-toastify';
+import { useDispatch } from "react-redux";
+import { setJWT } from "./redux/slices/user";
+import { useNavigate } from "react-router-dom";
 let loginForm = {
     name : "Login to your Formify account",
     elements : {
@@ -21,9 +26,28 @@ let loginForm = {
 }
 
 function PageLogin(){
-    function attemptLogin(formData){
-        console.log(formData);
-        toast.success("Successfully logged in")
+    const navigate = useNavigate();
+
+    const loginToastr = useRef(null);
+    const dispatch = useDispatch();
+    async function attemptLogin(formData){
+        if(loginToastr.current){
+            return;
+        }
+
+        loginToastr.current = toast.loading("Attempting login", {autoClose : true});
+
+        let result = await axios.postForm("auth/login", formData);
+
+        if(result.success){
+            dispatch(setJWT(result.data.body));
+            navigate("/");
+            toast.update(loginToastr.current, {render : "Successfully logged in", type : 'success', isLoading : false, autoClose : true, className : 'alert alert-success'});
+        }else{
+            toast.update(loginToastr.current, {render : result.error, type: "error", isLoading : false, autoClose : true, className : 'alert alert-error'});
+        }
+
+        loginToastr.current = null;
     }
 
     return (

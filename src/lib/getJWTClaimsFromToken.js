@@ -5,3 +5,5 @@ const getJWTClaimsFromToken = (token) => {
 
     return JSON.parse(decodedPayload);
 }
+
+export default getJWTClaimsFromToken;

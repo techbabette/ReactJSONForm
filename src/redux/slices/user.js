@@ -1,4 +1,5 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
+import getJWTClaimsFromToken from "../../lib/getJWTClaimsFromToken"
 export const userSlice = createSlice({
     name : "user",
     initialState : {
@@ -20,7 +21,9 @@ export const userSlice = createSlice({
 
 export const { setLinks, setJWT } = userSlice.actions;
 
-export const getLinks = (state) => state.user.links
+export const getJWT = (state) => state.user.JWT;
+
+export const getLinks = (state) => state.user.links;
 
 export const getUserGroup = (state) => state.user.JWT ? getJWTClaimsFromToken(state.user.JWT)["group"] : "Logged out"
 

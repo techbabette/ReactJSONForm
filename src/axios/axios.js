@@ -1,6 +1,21 @@
 import axios from "axios";
+import store from "../redux/store";
+import { getJWT } from "../redux/slices/user";
+
 
 const axiosInstance = axios.create({baseURL : window.__ENV__.API_URL});
+
+
+axiosInstance.interceptors.request.use((config) => {
+    const state = store.getState();
+    const token = getJWT(state);
+
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+})
 
 axiosInstance.interceptors.response.use(
     function (response){
@@ -10,17 +25,22 @@ axiosInstance.interceptors.response.use(
     }, 
     function(error){
         let response = {success : false, error : "Error communicating with server"};
+        console.log(error);
         if(!error.response){
             return response;
         }
-        if(!error.response.data.errors){
-            return response;
+
+        if(error.response.data.message){
+            response.error = error.response.data.message;
         }
-        response.error = error.response.data.message;
-        response.errors = {};
-        for(let key of Object.keys(error.response.data.errors)){
-            response.errors[key] = error.response.data.errors[key][0];
+
+        if(error.response.data.errors){
+            response.errors = {};
+            for(let key of Object.keys(error.response.data.errors)){
+                response.errors[key] = error.response.data.errors[key][0];
+            }
         }
+
         return response;
     }
 );
