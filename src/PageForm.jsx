@@ -5,106 +5,35 @@ import NavLink from './NavLink';
 import axios from './axios/axios';
 import { useParams } from 'react-router-dom';
 import getFormFromResponse from './lib/formFromResponse';
-
-let formJSON = {
-  id : 1,
-  name : "New form",
-  direction : "row",
-  elements : {
-      2 : {
-          type : {
-            id: 1,
-            text : "Text",
-            type: "text"
-          },
-          label : "Last name",
-          required : true,
-          width : 6,
-          weight : 99
-      },
-      3 : {
-          type : {
-            id: 2,
-            text : "Email",
-            type: "email"
-          },
-          label : "Email",
-          required : true,
-          width : 12,
-          weight : 98
-      },
-      1 : {
-          type : {
-            id: 1,
-            text : "Text",
-            type: "text"
-          },
-          label : "First name",
-          required : true,
-          width : 6,
-          weight : 100,
-      },
-      4 : {
-          type : {
-            id: 3,
-            text : "Select",
-            type: "select"
-          },
-          label : "Select city",
-          required : true,
-          width : 12,
-          weight : 97,
-          options : ["Belgrade", "Novi sad", "Nis"]
-      },
-      5 : {
-          type : {
-            id: 3,
-            text : "Select multiple",
-            type: "select_multiple"
-          },
-          label : "Select classes",
-          required : true,
-          hint : "Select multiple",
-          width : 12,
-          weight : 96,
-          options : ["C#", "PHP", "React"]
-      }
-  }
-}
-
+import { getLinksForPosition } from './redux/slices/user';
+import { useSelector } from 'react-redux';
 function PageForm() {
   let {id} = useParams();
   let [form, setForm] = useState({});
   let [loaded, setLoaded] = useState(false);
+  const linksForPosition = useSelector((state) => getLinksForPosition(state, "visiting_form_navbar"));
+
+  useEffect(() => {
+    async function loadForm() {
+      let result = await axios.get(`/forms/${id}`);
+      if(result.success){
+        setForm(getFormFromResponse(result.data.body));
+        setLoaded(true);
+        return;
+      }
+    }
+
+    loadForm();
+  }, [])
 
   function helloWorld(data){
     console.log("Hello world");
     console.log(data);
   }
 
-
-  useEffect(() => {
-    async function loadForm() {
-      let result = await axios.get(`/forms/${id}`);
-      console.log(result);
-      if(result.success){
-        setForm(getFormFromResponse(result.data.body));
-        setLoaded(true);
-        return;
-      }
-
-      setForm(formJSON);
-      setLoaded(true);
-    }
-
-    loadForm();
-  }, [])
-
-  let links = <NavLink to="form/new" text="Make your own form here" className="text-accent"/>
-
+  let links = linksForPosition.map((link, index) => <NavLink key={index} to={link.to} text={link.text} className="text-accent"/>) 
   return (
     <>
-
     {loaded && 
     <>
     <NavBar links={links}/>
