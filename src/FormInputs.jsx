@@ -29,9 +29,10 @@ function FormInputs(props){
 
         if(currentInput.type.type === "select_without_hint"){
             let defaultOption = currentInput.defaultOption;
-            let useDefaultOption = !!defaultOption;
 
-            defaultValue = useDefaultOption ? currentInput.options[defaultOption] : 0
+            let defaultOptionValue = currentInput.options[defaultOption];
+
+            defaultValue = defaultOptionValue ?? 0
         }
 
         if(currentInput.type.type === "select_multiple"){
@@ -43,7 +44,7 @@ function FormInputs(props){
         }
         
         return <FormInputsItem key={key} id={key} error={errors[key]} 
-        value={props.value[key] ?? defaultValue} onChange={handler} remove_value={() => removeValueOfElement(key)} {...formJSON.elements[key]}/>
+        value={props.value[key] ?? defaultValue} defValue={defaultValue} onChange={handler} remove_value={() => removeValueOfElement(key)} {...formJSON.elements[key]}/>
     }
     )
 

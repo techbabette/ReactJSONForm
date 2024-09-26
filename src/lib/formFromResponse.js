@@ -82,6 +82,4 @@ function getFormFromResponse(responseForm){
     return form;
 }
 
-console.log(getFormFromResponse(response));
-
 export default getFormFromResponse;
