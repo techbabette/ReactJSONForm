@@ -7,10 +7,10 @@ function FormInputs(props){
     let inputKeys = Object.keys(formJSON.elements);
     let sortedInputKeys = inputKeys.sort((a,b) => formJSON.elements[b].weight - formJSON.elements[a].weight);
     
-    function handleInputChange(newValue, key){
+    function handleInputChange(newValue, key, loud = true){
         let newFormValue = {...props.value};
         newFormValue[key] = newValue;
-        props.onChange(newFormValue, key);
+        props.onChange(newFormValue, key, loud);
     }
 
     function removeValueOfElement(key){
@@ -42,9 +42,13 @@ function FormInputs(props){
         let handler = function(value){
             handleInputChange(value, key);
         }
+
+        if(props.value[key] === undefined){
+            handleInputChange(defaultValue, key, false);
+        }
         
         return <FormInputsItem key={key} id={key} error={errors[key]} 
-        value={props.value[key] ?? defaultValue} defValue={defaultValue} onChange={handler} remove_value={() => removeValueOfElement(key)} {...formJSON.elements[key]}/>
+        value={props.value[key] ?? defaultValue} onChange={handler} remove_value={() => removeValueOfElement(key)} {...formJSON.elements[key]}/>
     }
     )
 

@@ -11,10 +11,6 @@ function FormInputsItem(props){
         props.remove_value();
     }, [props.type.type])
 
-    useEffect(() => {
-        props.onChange(props.value);
-    }, [])
-
     let width = "";
     if(props.width != 12){
         width = `w-${props.width}\/12`;
