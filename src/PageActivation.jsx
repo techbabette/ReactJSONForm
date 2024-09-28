@@ -20,7 +20,6 @@ function PageActivation(){
             navigate("/");
             return;
           }
-          console.log(result);
           toast.error("Invalid activation token");
           navigate("/");
         }
