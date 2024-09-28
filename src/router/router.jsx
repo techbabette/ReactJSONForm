@@ -6,6 +6,7 @@ import PageForm from "../PageForm";
 import PageLogin from "../PageLogin";
 import PageRegister from "../PageRegister";
 import PageFormNew from "../PageFormNew";
+import PageActivation from "../PageActivation";
 
 const router = createBrowserRouter([
     {
@@ -23,17 +24,21 @@ const router = createBrowserRouter([
             {
                 element: <PageRegister/>,
                 path: "/register"
+            },
+            {
+                element: <PageActivation/>,
+                path: "activate/:token"
             }
         ]
     },
     {
-        path: "form/new",
-        element: <PageFormNew/>
+        element: <PageFormNew/>,
+        path: "form/new"
     },
     {
-        path: "form/:id",
-        element: <PageForm/>
-    }
+        element: <PageForm/>,
+        path: "form/:id"
+    },
 ])
 
 export default router;
