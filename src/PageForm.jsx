@@ -11,6 +11,7 @@ function PageForm() {
   let {id} = useParams();
   let [form, setForm] = useState({});
   let [loaded, setLoaded] = useState(false);
+  let [error, setError] = useState(null);
   const linksForPosition = useSelector((state) => getLinksForPosition(state, "visiting_form_navbar"));
 
   useEffect(() => {
@@ -21,6 +22,8 @@ function PageForm() {
         setLoaded(true);
         return;
       }
+      console.log("here");
+      setError(true);
     }
 
     loadForm();
@@ -41,12 +44,19 @@ function PageForm() {
       <FormComplete form={form} onSubmit={helloWorld}/>
     </div>
     </>}
-    {!loaded && 
+    {(!loaded && !error) && 
     <div className='w-full h-screen mk-text-center'>
         <p className='my-2 text-8xl text-primary'>Loading form</p>
         <span className="loading loading-spinner mx-auto loading-lg"></span>
     </div>
-
+    }
+    {error && 
+    <>
+      <NavBar links={links}/>
+      <div className='w-11/12 md:w-6/12 mx-auto solo-page flex justify-center items-center'>
+        <p className='my-2 text-8xl text-primary'>Form not found</p>
+      </div>
+    </>
     }
     </>
   )
