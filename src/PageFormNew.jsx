@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import FormEditor from "./FormEditor";
 import axios from "./axios/axios";
 import PageFormNewLoading from "./PageFormNewLoading";
+import PageFormNewCreateButton from "./PageFormNewCreateButton";
 
 function PageFormNew(){
     let [defaultFieldType, setDefaultFieldType] = new useState(null)
@@ -70,7 +71,7 @@ function PageFormNew(){
         }
         {form && 
         <>
-        <NavBar/>
+        <NavBar buttons={<PageFormNewCreateButton form={form}/>}/>
         <FormEditor form={form} setForm={setFormAndSave}
         defaultFieldType={defaultFieldType} regexOptions={regexOptions}
         formTypeOptions={formTypeOptions}/>
