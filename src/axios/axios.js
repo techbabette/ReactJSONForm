@@ -1,6 +1,6 @@
 import axios from "axios";
 import store from "../redux/store";
-import { getJWT } from "../redux/slices/user";
+import { getJWT, setJWT } from "../redux/slices/user";
 
 
 const axiosInstance = axios.create({baseURL : window.__ENV__.API_URL});
@@ -39,6 +39,10 @@ axiosInstance.interceptors.response.use(
             for(let key of Object.keys(error.response.data.errors)){
                 response.errors[key] = error.response.data.errors[key][0];
             }
+        }
+
+        if(error.response.status === 401){
+            store.dispatch(setJWT(null));
         }
 
         return response;
