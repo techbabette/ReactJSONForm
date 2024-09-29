@@ -17,7 +17,11 @@ function PageActivation(){
           if(result.success){
             dispatch(setJWT(result.data.body));
             toast.success("Successfully activated account");
-            navigate("/");
+            if(localStorage.getItem("newFormState") === null){
+              navigate("/");
+              return;
+            }
+            navigate("/form/new");
             return;
           }
           toast.error("Invalid activation token");
@@ -30,7 +34,7 @@ function PageActivation(){
 
     return (
     <div className='w-full h-screen mk-text-center'>
-        <p className='my-2 text-8xl text-primary'>Activating account</p>
+        <p className='my-3 text-8xl text-primary'>Activating account</p>
         <span className="loading loading-spinner mx-auto loading-lg"></span>
     </div>
     );

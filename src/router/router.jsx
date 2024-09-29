@@ -25,10 +25,6 @@ const router = createBrowserRouter([
                 element: <PageRegister/>,
                 path: "/register"
             },
-            {
-                element: <PageActivation/>,
-                path: "activate/:token"
-            }
         ]
     },
     {
@@ -39,6 +35,10 @@ const router = createBrowserRouter([
         element: <PageForm/>,
         path: "form/:id"
     },
+    {
+        element: <PageActivation/>,
+        path: "activate/:token"
+    }
 ])
 
 export default router;
