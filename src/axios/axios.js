@@ -42,7 +42,7 @@ axiosInstance.interceptors.response.use(
         }
 
         if(error.response.status === 401){
-            store.dispatch(setJWT(null));
+            store.dispatch(setJWT(""));
         }
 
         return response;
