@@ -26,12 +26,10 @@ function PageFormNewCreateButton(props){
 
         let result = await axios.postForm("/forms", props.form);
 
-        console.log(result);
-
         if(result.success){
-            //TODO: Get form id from response and copy link to clipboard, navigate to myforms page
             localStorage.setItem("newFormState", "");
-            navigate("/");
+            let newFormId = result.data.body.id;
+            navigate(`/form/${newFormId}`);
             toast.update(createToastr.current, {render : "Successfully created form", type : 'success', isLoading : false, autoClose : true, className : 'alert alert-success'});
         }else{
             toast.update(createToastr.current, {render : result.error, type: "error", isLoading : false, autoClose : true, className : 'alert alert-error'});
