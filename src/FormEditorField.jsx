@@ -157,6 +157,7 @@ function FormEditorField(props){
                 <>
                                 <InputAdaptable type="text" placeholder="New option" onChange={onChange} value={option} className="w-10/12"/>
                                 <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-error border-0 rounded-sm">Delete</button>
+                                {props.formErrors?.[id]?.["options"]?.[index] && <span className="alert alert-warning mb-2 rounded-t-none">{props.formErrors?.[id]?.["options"]?.[index]}</span>}
                 </>
                 }
                 {elementTypesWithDefaultOption.includes(element.type.type) && 
@@ -168,6 +169,7 @@ function FormEditorField(props){
                                 {!currentOptionIsDefault && "Make default"}
                                 </button>
                                 <button onClick={() => deleteOption(index)} className="w-2/12 btn btn-error border-0 rounded-sm">Delete</button>
+                                {props.formErrors?.[id]?.["options"]?.[index] && <span className="alert alert-warning mb-2 rounded-t-none">{props.formErrors?.[id]?.["options"]?.[index]}</span>}
                 </>
                 }
 
@@ -190,6 +192,7 @@ function FormEditorField(props){
         <div className="flex flex-col w-full md:w-4/12 border-1 border-base-300">
             <label className="">Field name</label>
             <InputAdaptable className="bg-base-200 " type="text" placeholder="Field name" onChange={changeName} value={element.label}/>
+            {props.formErrors?.[id]?.["label"] && <span className="alert alert-warning mb-2 rounded-t-none">{props.formErrors?.[id]?.["label"]}</span>}
         </div>
         <div className="w-full md:w-4/12">
             <label className="">Field type</label>
@@ -213,10 +216,12 @@ function FormEditorField(props){
         <div className="w-full">
             <label  className="">Minimum (Optional)</label>
             <InputAdaptable className="w-full bg-base-200 " type="number" onChange={changeMinimum} value={element.minimum || ""}/>
+            {props.formErrors?.[id]?.["minimum"] && <span className="alert alert-warning mb-2 rounded-t-none">{props.formErrors?.[id]?.["minimum"]}</span>}
         </div>
         <div className="w-full">
             <label  className="">Maximum (Optional)</label>
             <InputAdaptable className="w-full bg-base-200 " type="number" onChange={changeMaximum} value={element.maximum || ""}/>
+            {props.formErrors?.[id]?.["maximum"] && <span className="alert alert-warning mb-2 rounded-t-none">{props.formErrors?.[id]?.["maximum"]}</span>}
         </div>
         </>
         }

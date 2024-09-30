@@ -31,7 +31,7 @@ function checkFormEditorFieldsAll(form){
         }
 
         if(elementTypesWithMinimumMaximum.includes(fieldType)){
-            if(element.minimum !== null && element.maximum !== null){
+            if((element.minimum !== null && element.minimum !== "") && (element.maximum !== null && element.maximum !== "")){
                 if(element.minimum > element.maximum){
                     fieldErrors["minimum"] = "Minimum cannot be greater than maximum";
                     fieldErrors["maximum"] = "Maximum cannot be lesser than mimimum";

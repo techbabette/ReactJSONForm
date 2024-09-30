@@ -19,6 +19,7 @@ export default function FormEditor(props){
         return (
             <FormEditorField key={fieldId} id={fieldId} element={formElement}
             form={form} setForm={setForm}
+            formErrors={props.formErrors} setFormErrors={props.setFormErrors}
             formTypeOptions={formTypeOptions} regexOptions={regexOptions}/>
         )
     }) 
@@ -75,6 +76,7 @@ export default function FormEditor(props){
             <div className="w-full md:w-6/12">
                 <label htmlFor="nameInput" className="text-2xl p-2">Form name</label>
                     <InputAdaptable id="nameInput" className="w-full block" type="text" onChange={changeName} value={form.name}/>
+                    {props.formErrors?.["name"] && <span className="alert alert-warning mb-2 rounded-t-none">{props.formErrors?.["name"]}</span>}
             </div>
             <div className="w-full md:w-6/12">
                 <label htmlFor="formResetButton" className="text-2xl p-2">Form reset button</label>
