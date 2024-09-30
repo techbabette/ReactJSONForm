@@ -18,10 +18,27 @@ function FormEditorField(props){
     const elementTypesWithDefaultOption = ['select_without_hint'];
 
     useEffect(() => {
-        if(elementTypesWithOptions.includes(element.type.type) && !element.options){
+        let elementTypeHasOptions = elementTypesWithOptions.includes(element.type.type);
+        let elementHasOptions = !!element.options;
+
+        let elementTypeHasDefaultOption = elementTypesWithDefaultOption.includes(element.type.type);
+        let elementHasDefaultOption = !!element.defaultOption;
+
+        if((elementTypeHasOptions && !elementHasOptions) && (elementTypeHasDefaultOption && !elementHasDefaultOption)){
+            let currentShape = {...element};
+            currentShape["options"] = [""];
+            currentShape["defaultOption"] = 0;
+            let currentForm = {...form};
+            currentForm.elements[id] = currentShape;
+    
+            setForm(currentForm);
+            return;
+        }
+
+        if(elementTypeHasOptions && !elementHasOptions){
             changeCurrentElement('options')([""]);
         }
-        if(elementTypesWithDefaultOption.includes(element.type.type) && !element.defaultOption){
+        if(elementTypeHasDefaultOption && !elementHasDefaultOption){
             changeCurrentElement('defaultOption')(0);
         }
     }, [element.type.type])

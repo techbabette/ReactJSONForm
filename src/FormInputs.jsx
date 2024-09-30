@@ -30,7 +30,7 @@ function FormInputs(props){
         if(currentInput.type.type === "select_without_hint"){
             let defaultOption = currentInput.defaultOption;
 
-            let defaultOptionValue = currentInput.options[defaultOption];
+            let defaultOptionValue = currentInput.options?.[defaultOption];
 
             defaultValue = defaultOptionValue ?? 0
         }
