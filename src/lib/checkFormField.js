@@ -1,8 +1,4 @@
 function checkFormField(field, value){
-    if(!field.required && !field.regex){
-        return null;
-    }
-
     if(field.regex){
         let flagIndex = field.regex.lastIndexOf("/");
         let regex = field.regex.substring(1, flagIndex);

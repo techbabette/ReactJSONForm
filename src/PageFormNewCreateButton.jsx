@@ -2,11 +2,19 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import axios from "./axios/axios";
+import checkFormEditorFieldsAll from "./lib/checkFormEditorFieldsAll";
 function PageFormNewCreateButton(props){
     const createToastr = useRef(null);
     const navigate = useNavigate();
     async function submit(){
         //TODO: Check all fields valid before submitting
+        let errors = checkFormEditorFieldsAll(props.form);
+        props.setErrors(errors);
+        if(Object.keys(errors).length !== 0){
+            toast.error("Fix errors before saving");
+            return;
+        }
+
         if(createToastr.current){
             return;
         }

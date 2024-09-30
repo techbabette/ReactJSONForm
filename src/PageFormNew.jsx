@@ -9,6 +9,7 @@ function PageFormNew(){
     let [defaultFieldType, setDefaultFieldType] = new useState(null)
     let [regexOptions, setRegexOptions] = new useState(null)
     let [form, setForm] = new useState(null);
+    let [formErrors, setFormErrors] = new useState(null);
     let [formTypeOptions, setFormTypeOptions] = new useState(null);
 
     let setFormAndSave = function(newFormState){
@@ -71,8 +72,9 @@ function PageFormNew(){
         }
         {form && 
         <>
-        <NavBar buttons={<PageFormNewCreateButton form={form}/>}/>
+        <NavBar buttons={<PageFormNewCreateButton form={form} setErrors={setFormErrors}/>}/>
         <FormEditor form={form} setForm={setFormAndSave}
+        formErrors={formErrors} setFormErrors={setFormErrors}
         defaultFieldType={defaultFieldType} regexOptions={regexOptions}
         formTypeOptions={formTypeOptions}/>
         </>
