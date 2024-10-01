@@ -12,7 +12,7 @@ function ButtonsPagination(props){
     {(lastPage > 1) && 
     <div className='w-full mx-auto flex flex-row items-center justify-between'>
         <button disabled={page === 1} onClick={() => changePage(-1)} className="btn btn-neutral disabled:btn-disabled">&lt;</button>
-        <p>{page}</p>
+        <p>Page {page} of {lastPage}</p>
         <button disabled={page >= lastPage} onClick={() => changePage(1)} className="btn btn-neutral disabled:btn-disabled">&gt;</button>
       </div>
     }
