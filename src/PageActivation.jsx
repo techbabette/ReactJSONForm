@@ -17,7 +17,7 @@ function PageActivation(){
           if(result.success){
             dispatch(setJWT(result.data.body));
             toast.success("Successfully activated account");
-            if(localStorage.getItem("newFormState") === null){
+            if(!localStorage.getItem("newFormState")){
               navigate("/");
               return;
             }
