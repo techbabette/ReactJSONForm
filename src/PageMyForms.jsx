@@ -50,7 +50,7 @@ function PageMyForms() {
         <div className='border-1 border-base-100 bg-base-100'>
             {formsHTML}
         </div>
-        <div className="w-6/12 mx-auto">
+        <div className="w-11/12 md:w-6/12 mx-auto">
         {pageControl}
         </div>
         </>
