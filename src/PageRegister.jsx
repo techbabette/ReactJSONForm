@@ -52,7 +52,7 @@ function PageRegister(){
 
         if(result.success){
             setErrors(null);
-            toast.update(registrationToastr.current, {render : "Successfully created new account", type : 'success', isLoading : false, autoClose : true, className : 'alert alert-success'});
+            toast.update(registrationToastr.current, {render : "Successfully created new account, check your email", type : 'success', isLoading : false, autoClose : true, className : 'alert alert-success'});
         }else{
             let requestErrors = {...result.errors};
             setErrors(requestErrors);
