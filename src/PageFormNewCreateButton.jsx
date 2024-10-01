@@ -7,7 +7,6 @@ function PageFormNewCreateButton(props){
     const createToastr = useRef(null);
     const navigate = useNavigate();
     async function submit(){
-        //TODO: Check all fields valid before submitting
         let errors = checkFormEditorFieldsAll(props.form);
         props.setErrors(errors);
         if(Object.keys(errors).length !== 0){

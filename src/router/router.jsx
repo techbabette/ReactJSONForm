@@ -7,7 +7,7 @@ import PageLogin from "../PageLogin";
 import PageRegister from "../PageRegister";
 import PageFormNew from "../PageFormNew";
 import PageActivation from "../PageActivation";
-
+import PageMyForms from "../PageMyForms";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -25,6 +25,10 @@ const router = createBrowserRouter([
                 element: <PageRegister/>,
                 path: "/register"
             },
+            {
+                element: <PageMyForms/>,
+                path: "/forms/me"
+            }
         ]
     },
     {
