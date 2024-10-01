@@ -35,8 +35,7 @@ function PageFormNewCreateButton(props){
 
         if(result.success){
             localStorage.setItem("newFormState", "");
-            let newFormId = result.data.body.id;
-            navigate(`/form/${newFormId}`);
+            navigate(`/forms/me`);
             toast.update(createToastr.current, {render : "Successfully created form", type : 'success', isLoading : false, autoClose : true, className : 'alert alert-success'});
         }else{
             toast.update(createToastr.current, {render : result.error, type: "error", isLoading : false, autoClose : true, className : 'alert alert-error'});
