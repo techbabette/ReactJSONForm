@@ -10,7 +10,19 @@ function checkFormEditorField(element){
     }
 
     if(fieldType === "text" && element.regex){
-        //TODO Check if regex is valid
+        let validRegex = false;
+        try {
+            let matches = element.regex.match(/^([/~@;%#'])(.*?)\1([gimsuy]*)$/);
+            new RegExp(matches[2], matches[3])
+            validRegex = true;
+          } catch (e) {
+            validRegex = false
+        }
+
+
+        if(!validRegex){
+            errors["regex"] = "Invalid regex";
+        }
     }
 
     if(elementTypesWithOptions.includes(fieldType)){

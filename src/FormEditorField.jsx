@@ -254,6 +254,8 @@ function FormEditorField(props){
             <label  className="">Regex (Optional)</label>
             <InputAdaptable className="w-full bg-base-200 " type="text" placeholder="/^[a-z]$/"
             onChange={changeRegex} value={element.regex}/>
+            {props.formErrors?.[id]?.["regex"] && <span className="alert alert-warning mb-2 rounded-t-none">{props.formErrors?.[id]?.["regex"]}</span>}
+
         </div>
         </>}
         {elementTypesWithOptions.includes(element.type.type) &&
