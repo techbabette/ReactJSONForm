@@ -34,6 +34,10 @@ axiosInstance.interceptors.response.use(
             response.error = error.response.data.message;
         }
 
+        if(error.response.data.error){
+            response.error = error.response.data.error;
+        }
+
         if(error.response.data.errors){
             response.errors = {};
             for(let key of Object.keys(error.response.data.errors)){
