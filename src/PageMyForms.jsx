@@ -43,8 +43,8 @@ function PageMyForms() {
     <div className='w-full h-screen'>
         <p className='my-3 text-2xl mk-text-center text-primary'>These are your forms</p>
         {(!forms && !error) && <span className="loading loading-spinner mk-text-center my-auto mx-auto loading-lg"></span>}
-        {error && "Your forms could not be retrieved"}
-        {(forms && forms.length === 0) && "No forms found"}
+        {error && <span className="mk-text-center my-auto mx-auto">Your forms could not be retrieved</span>}
+        {(forms && forms.length === 0) && <span className="mk-text-center my-auto mx-auto">No forms found</span>}
         {(forms && forms.length > 0) && 
         <>
         <div className='border-1 border-base-100 bg-base-100'>
