@@ -8,6 +8,7 @@ import PageRegister from "../PageRegister";
 import PageFormNew from "../PageFormNew";
 import PageActivation from "../PageActivation";
 import PageMyForms from "../PageMyForms";
+import PageFormResponses from "../PageFormResponses";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 element: <PageMyForms/>,
                 path: "/forms/me"
+            },
+            {
+                element: <PageFormResponses/>,
+                path: "/forms/:id/responses"
             }
         ]
     },

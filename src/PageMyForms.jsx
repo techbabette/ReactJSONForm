@@ -1,15 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from './axios/axios';
-import { useNavigate } from 'react-router-dom';
 import PageMyFormsForm from './PageMyFormsForm';
 import ButtonsPagination from './ButtonsPagination';
 function PageMyForms() {
-  let [loaded, setLoaded] = useState(false);
   let [error, setError] = useState(false);
   let [forms, setForms] = useState(null);
   let [page, setPage] = useState(1);
   let [lastPage, setLastPage] = useState(1);
-  const navigate = useNavigate();
 
   useEffect(() => {
     getForms();
@@ -21,10 +18,10 @@ function PageMyForms() {
 
   async function getForms(page = 1){
     let result = await axios.get(`forms/me`, {params : {page}});
-    console.log(page);
     if(result.success){
         setLastPage(result.data.body.last_page);
         setForms(result.data.body.data);
+        setError(false);
     }
     else{
         setError(true);
