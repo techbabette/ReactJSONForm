@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from './axios/axios';
 import ButtonsPagination from './ButtonsPagination';
 import { useParams } from 'react-router-dom';
+import PageFormResponsesResponse from './PageFormResponsesResponse';
 function PageFormResponses() {
   let {id} = useParams();
   let [error, setError] = useState(false);
@@ -10,7 +11,6 @@ function PageFormResponses() {
   let [lastPage, setLastPage] = useState(1);
 
   useEffect(() => {
-    console.log("here");
     getResponses();
   }, [])
 
@@ -31,19 +31,8 @@ function PageFormResponses() {
   }
 
   let responsesHTML = responses ? responses.map((response) => {
-    console.log(response);
-    let responseValuesHTML = [];
-    for(let valueKey of Object.keys(response.values)){
-        console.log(valueKey);
-        let valueOfKey = response.values[valueKey] instanceof Array ? response.values[valueKey].join(", ") : response.values[valueKey];
-        responseValuesHTML.push(<p>{valueKey}: {valueOfKey}</p>)
-    }
     return (
-        <div className='w-11/12 md:w-6/12 mx-auto flex flex-col flex-wrap border bg-base-200 hover:bg-primary-content rounded-lg p-2 my-4 text-left'>
-            <p>Response created on {response.created_at}</p>
-            <hr/>
-            {responseValuesHTML}
-        </div>
+        <PageFormResponsesResponse response={response}/>
     )
   }) : null;
 
