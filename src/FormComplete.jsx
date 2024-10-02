@@ -60,7 +60,7 @@ function FormComplete(props){
 
     return (
     <div className={'w-full ' + props.className}>
-        <h1 className="p-2 text-2xl">{form.name ? form.name : "Form name goes here"}</h1>
+        <h1 className="p-2 pl-0 text-2xl">{form.name ? form.name : "Form name goes here"}</h1>
         <FormInputs form={form} errors={formErrors} value={formValue} onChange={handleChange}/>
         {form.resetButtonAvailable === "true" && 
         <button type="button" className="btn btn-accent w-full px-2 my-2" onClick={handleReset}>Reset form</button>

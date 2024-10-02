@@ -96,7 +96,7 @@ export default function FormEditor(props){
             {newFieldButton}
         </div>
         <div className="w-full md:w-1/2 border-t-2 md:border-t-0 md:border-l-2 p-2 solo-page">
-            <h2 className="text-4xl p-2">Form preview</h2>
+            <h2 className="text-4xl p-2 pl-0">Form preview</h2>
             <FormComplete form={form} onSubmit={dummySubmit}/>        
         </div>
         </div>
