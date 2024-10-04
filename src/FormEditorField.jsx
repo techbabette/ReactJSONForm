@@ -72,6 +72,11 @@ function FormEditorField(props){
 
     let deleteField = function(){
         let currentForm = {...form};
+
+        if(Object.keys(currentForm.elements).length < 2){
+            return;
+        }
+
         delete currentForm.elements[id];
 
         setForm(currentForm);
