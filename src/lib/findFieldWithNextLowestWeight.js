@@ -93,6 +93,4 @@ function findNextFieldByWeight(form, selfIndex, direction){
     }
 }
 
-console.log(findNextFieldByWeight(formJSON, 1, "lower"));
-
 export default findNextFieldByWeight;
