@@ -11,17 +11,23 @@ function checkFormEditorField(element){
 
     if(fieldType === "text" && element.regex){
         let validRegex = false;
+        let matches = null;
         try {
-            let matches = element.regex.match(/^([/~@;%#'])(.*?)\1([gimsuy]*)$/);
+            matches = element.regex.match(/^([/~@;%#'])(.*?)\1([gimsuy]*)$/);
             new RegExp(matches[2], matches[3])
             validRegex = true;
           } catch (e) {
             validRegex = false
         }
 
+        let unescapedSlashPattern = /(?<!\\)\//;
 
         if(!validRegex){
             errors["regex"] = "Invalid regex";
+        }
+
+        if(matches?.[2] && unescapedSlashPattern.test(matches[2])){
+            errors["regex"] = "Regex cannot contain unescaped / outside of delimiters"
         }
     }
 
