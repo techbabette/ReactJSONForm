@@ -1,5 +1,5 @@
 function checkFormField(field, value){
-    if(field.regex){
+    if(field.regex && value){
         let flagIndex = field.regex.lastIndexOf("/");
         let regex = field.regex.substring(1, flagIndex);
         let flags = field.regex.substring(flagIndex + 1);
