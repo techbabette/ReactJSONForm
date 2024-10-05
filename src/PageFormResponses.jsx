@@ -32,7 +32,7 @@ function PageFormResponses() {
 
   let responsesHTML = responses ? responses.map((response) => {
     return (
-        <PageFormResponsesResponse response={response}/>
+        <PageFormResponsesResponse response={response} key={response.id}/>
     )
   }) : null;
 
