@@ -1,8 +1,27 @@
-# React + Vite
+# [Formfiy](https://formify.techbabette.com/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+Formify is a web application that helps people create no-code forms in a user friendly way.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies used
+
+The frontend is based on React and it's various libraries, [the backend](https://github.com/techbabette/FormifyBackend) is comprised of a main Laravel service and a NodeJS microservice, the backend services communicate using RabbitMQ and take advantage of Redis for caching.
+
+## Running
+
+To run the frontend, clone this repository and type 
+
+```
+npm run dev
+```
+to start a local development environment, or
+```
+npm run build
+```
+to build the frontend for a production environment.
+
+## Features
+
+- Lets users start creating forms locally before they register, increasing user retention.
+- Light & dark mode available.
