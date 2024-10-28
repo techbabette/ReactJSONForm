@@ -1,0 +1,40 @@
+# This workflow builds the frontend, deletes the env folder to not overwrite it and uploads the result to S3
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js 20
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+    - run: npm ci
+    - run: npm run build
+
+    - name: Remove environment file to not overwrite it
+      run: |
+        rm ./env.js
+        
+    - name: Upload to S3
+      run: |
+        aws s3 sync ./dist s3://formifyfrontendrepo
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: 'eu-north-1'
+
+    - name: Invalidate cache to show changes
+      run: |
+        aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}  --paths "/*"
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: 'eu-north-1'
