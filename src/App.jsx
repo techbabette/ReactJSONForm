@@ -3,7 +3,7 @@ import router from './router/router'
 
 import ToastContainer from './toast/ToastContainer'
 
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { getTheme } from './redux/slices/theme';
 import axios from "./axios/axios";
@@ -13,15 +13,25 @@ import { setLinks, getLinks } from './redux/slices/user';
 function App(){
     const theme = useSelector(getTheme);
     const links = useSelector(getLinks);
+    const [error, setError] = useState(null);
     const dispatch = useDispatch();
 
+    const sent = useRef(false);
     useEffect(() => {
         async function initialLoad() {
+            sent.current = true;
             let result = await axios.get('/links');
-            dispatch(setLinks(result.data));
+            if(result.success){
+                dispatch(setLinks(result.data));
+            }
+            else{
+                setError("Formify is currently offline");
+            }
         }
 
-        initialLoad();
+        if(!sent.current){
+            initialLoad();
+        }
     }, []);
 
     useEffect(() => {
@@ -42,7 +52,14 @@ function App(){
             <ToastContainer/>
         </>
         }
-        {!links && loading
+        {(!links && !error) && loading
+        }
+        {error && 
+            <>
+            <div className='w-full h-screen mk-text-center'>
+                <p className='my-2 text-8xl text-primary'>{error}</p>
+            </div>
+            </>
         }
         </>
     );
