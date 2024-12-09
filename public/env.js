@@ -1,3 +1,3 @@
 window.__ENV__ = {
-    "API_URL" : "http://localhost/api/"
+    "API_URL" : "/api/"
 }
