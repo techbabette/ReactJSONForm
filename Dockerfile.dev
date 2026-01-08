@@ -1,0 +1,8 @@
+FROM node:25-alpine
+
+COPY package.json /var/www/html/
+COPY package-lock.json /var/www/html/
+WORKDIR /var/www/html
+RUN yarn install
+
+CMD ["npm", "run" , "dev-host"]

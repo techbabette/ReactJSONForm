@@ -1,0 +1,27 @@
+services:
+  traefik:
+    image: traefik:v3.6.6
+    container_name: 'formify-traefik'
+    restart: unless-stopped
+    ports:
+      - "443:443"
+    environment:
+      CF_DNS_API_TOKEN: ${DNS_CLOUDFLARE_API_TOKEN}
+    volumes:
+      - ./data/acme.json:/acme.json
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./dev-traefik.yml:/traefik.yml:ro 
+    networks: 
+      - formify-frontend
+  frontend:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.stack=formify-frontend"
+      - "traefik.http.routers.formify.rule=Host(`formify.local.techbabette.com`)"
+      - "traefik.http.routers.formify.entrypoints=https"
+      - "traefik.http.routers.formify.tls=true"
+      - "traefik.http.routers.formify.tls.certresolver=cloudflare"
+      - "traefik.http.routers.formify.tls.domains[0].main=formify.local.techbabette.com"
+      - "traefik.http.routers.formify.tls.domains[0].sans=www.formify.local.techbabette.com"
+      - "traefik.http.services.formify.loadbalancer.server.port=5173"
+      - "traefik.docker.network=formify-frontend"

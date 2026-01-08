@@ -1,0 +1,31 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "127.0.0.1:5173:5173"
+    restart: unless-stopped
+    volumes:
+      - ./index.html:/var/www/html/index.html:ro
+      - ./public:/var/www/html/public:ro
+      - ./src:/var/www/html/src:ro
+      - ./tailwind.config.js:/var/www/html/tailwind.config.js:ro
+      - ./postcss.config.js:/var/www/html/postcss.config.js:ro
+      - ./vite.config.js:/var/www/html/vite.config.js:ro
+      - ./package.json:/var/www/html/package.json
+      - ./package-lock.json:/var/www/html/package-lock.json
+      - node_modules:/var/www/html/node_modules
+    networks: 
+      - formify-frontend
+      - formify-api
+
+volumes:
+  node_modules:
+
+networks:
+  formify-frontend:
+    name: formify-frontend
+  formify-api:
+    name: formify-api
+    external: true
