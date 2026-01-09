@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { toast } from 'react-toastify';
 import axios from "./axios/axios";
 import { setJWT } from "./redux/slices/user";
+import informServiceWorkerLogout from './lib/informServiceWorkerLogout';
+
 function LogoutButton(){
     const logoutToastr = useRef(null);
     const dispatch = useDispatch();
@@ -23,6 +25,7 @@ function LogoutButton(){
         if(result.success){
             dispatch(setJWT(""));
             navigate("/");
+            informServiceWorkerLogout();
             toast.update(logoutToastr.current, {render : "Successfully logged out", type : 'success', isLoading : false, autoClose : true, className : 'alert alert-success'});
         }else{
             toast.update(logoutToastr.current, {render : result.error, type: "error", isLoading : false, autoClose : true, className : 'alert alert-error'});

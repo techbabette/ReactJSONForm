@@ -13,6 +13,14 @@
       "type": "image/png"
     }
   ],
+  "screenshots": [
+    {
+      "src": "/screenshots/mobile-landing.png",
+      "sizes": "398x862",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
   "start_url": "/",
   "display": "standalone",
   "theme_color": "white",
